@@ -1,6 +1,14 @@
 {
   "name": "fichas",
   "version": "1.0.0",
+  "description": "Prepare a talk on index cards and present it one card at a time.",
+  "author": "Xavier Quirico",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XavierQuirico/fichas.git"
+  },
+  "homepage": "https://fichas-murex.vercel.app",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
