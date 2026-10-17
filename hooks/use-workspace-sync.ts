@@ -24,6 +24,7 @@ export function useWorkspaceSync() {
   const [decks, setDecks] = useState<Deck[]>([]);
   const [status, setStatus] = useState<SaveStatus>('loading');
   const [error, setError] = useState('');
+  const [retry, setRetry] = useState(0);
   const revision = useRef(0);
   const current = useRef<Deck[]>([]);
   const generation = useRef(0);
@@ -49,7 +50,13 @@ export function useWorkspaceSync() {
       revision.current = data.revision;
       savedGeneration.current = g;
       setError('');
-      setStatus(generation.current === g ? 'saved' : 'pending');
+      if (generation.current === g) setStatus('saved');
+      else {
+        // The user kept typing during the save. The status is already 'pending',
+        // so setting it again would not re-run the save effect; bump the counter.
+        setStatus('pending');
+        setRetry((n) => n + 1);
+      }
     } catch (e) {
       setStatus('error');
       setError(e instanceof Error ? e.message : 'No pudimos guardar.');
@@ -59,22 +66,24 @@ export function useWorkspaceSync() {
   }, []);
 
   /**
-   * Resolves once every edit made so far has reached the server, or once a
-   * save fails (the error banner explains why). Other endpoints that point at
-   * saved cards, such as card fonts, call this first.
+   * Saves every edit made so far and resolves true once they have all reached
+   * the server. Resolves false if a save fails or takes more than about ten
+   * seconds. Other endpoints that point at saved cards, such as card fonts,
+   * call this first and stop when it says false.
    */
-  const flush = useCallback(async () => {
+  const flush = useCallback(async (): Promise<boolean> => {
     if (saveTimer.current) clearTimeout(saveTimer.current);
-    for (let attempt = 0; attempt < 20; attempt++) {
-      if (generation.current === savedGeneration.current) return;
+    for (let attempt = 0; attempt < 100; attempt++) {
+      if (generation.current === savedGeneration.current) return true;
       if (busy.current) {
-        await new Promise((resolve) => setTimeout(resolve, 50));
+        await new Promise((resolve) => setTimeout(resolve, 100));
         continue;
       }
       const before = savedGeneration.current;
       await save();
-      if (savedGeneration.current === before) return;
+      if (savedGeneration.current === before) return false;
     }
+    return generation.current === savedGeneration.current;
   }, [save]);
 
   const change = useCallback(
@@ -94,6 +103,10 @@ export function useWorkspaceSync() {
     pendingLoad.current = true;
     fetchWorkspace()
       .then((data) => {
+        // What the server sent replaces whatever was on screen, so nothing is unsaved now.
+        if (saveTimer.current) clearTimeout(saveTimer.current);
+        generation.current = 0;
+        savedGeneration.current = 0;
         current.current = data.decks;
         setDecks(data.decks);
         revision.current = data.revision;
@@ -126,7 +139,7 @@ export function useWorkspaceSync() {
       const t = setTimeout(() => void save(), 750);
       return () => clearTimeout(t);
     }
-  }, [status, save, decks]);
+  }, [status, save, decks, retry]);
 
   useEffect(() => {
     const onClose = (e: BeforeUnloadEvent) => {

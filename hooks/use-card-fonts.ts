@@ -6,9 +6,10 @@ import { fontOptions, type FontId } from '@/lib/card-fonts';
 type Options = {
   /**
    * Runs before each font save. The server only stores a font for a card it
-   * already has, so the pending collection save must land first.
+   * already has, so the pending collection save must land first. Resolve
+   * false when it did not, and the font is not sent.
    */
-  beforeSave?: () => Promise<void>;
+  beforeSave?: () => Promise<boolean>;
 };
 
 /** Per-card typography. Saves are queued so they reach the server in the order they were made. */
@@ -37,7 +38,7 @@ export function useCardFonts({ beforeSave }: Options = {}) {
     setFontSaving(true);
     fontQueue.current = fontQueue.current.then(async () => {
       try {
-        await beforeSave?.();
+        if (beforeSave && !(await beforeSave())) throw new Error('The cards are not saved yet');
         const r = await fetch('/api/card-fonts', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
