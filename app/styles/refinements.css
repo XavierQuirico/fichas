@@ -1,0 +1,176 @@
+/* Foundation roles, noise texture and the sticky edge. */
+@media (max-width: 740px) {
+  .finish-card > .finish-actions {
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+  }
+  .finish-actions .button {
+    width: 100%;
+  }
+  .finish-inner {
+    gap: var(--space-3);
+  }
+  .finish-card .eyebrow {
+    font: var(--text-caption);
+    letter-spacing: 1px;
+  }
+}
+@media (max-height: 580px) {
+  .finish-card .finish-check {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+  }
+  .finish-check svg {
+    width: 22px;
+    height: 22px;
+  }
+  .finish-card h2 {
+    font: var(--text-display-sm);
+  }
+  .finish-inner {
+    gap: var(--space-2);
+  }
+  .finish-card > .finish-topline {
+    padding-bottom: var(--space-2);
+  }
+  .finish-card > .finish-content {
+    padding: var(--space-2) 0;
+  }
+  .finish-card > .finish-actions {
+    flex-direction: row;
+    gap: var(--space-1);
+    padding-top: var(--space-2);
+  }
+  .finish-actions .button {
+    width: auto;
+    min-height: 36px;
+    padding: var(--space-2) var(--space-2);
+    font: var(--text-caption);
+  }
+  .finish-message {
+    font: var(--text-body-sm);
+  }
+}
+
+/* foundation roles; editable type and responsive surface geometry stay intact. */
+body {
+  font: var(--text-body-md);
+}
+.brand {
+  font: var(--text-display-md);
+  letter-spacing: normal;
+}
+.library h1,
+.finish-card h2 {
+  font: var(--text-display-lg);
+  letter-spacing: normal;
+}
+.app-dialog [data-slot='dialog-title'],
+.first-deck h2 {
+  font: var(--text-display-md);
+  letter-spacing: normal;
+}
+.title-edit h1,
+.new-deck h2,
+.example-item h2 {
+  font: var(--text-display-sm);
+  letter-spacing: normal;
+}
+.eyebrow,
+.design-label,
+.cover-caption,
+.mini-eyebrow,
+.example-tag,
+.finish-topline {
+  font: var(--text-caption);
+  letter-spacing: var(--tracking-caption);
+}
+.editor-tip p {
+  font: var(--text-body-sm);
+  font-style: italic;
+}
+.paper {
+  color: var(--ink-primary);
+  background-color: var(--paper, var(--paper-lemon));
+}
+.paper.color-white {
+  border: 0;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role='slider']:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.new-exposure-button:focus-visible,
+.add-thumb:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Interface labels use the body scale; captions remain metadata. */
+.style-option,
+.button,
+.field-label,
+.apply-all {
+  font: var(--text-body-sm);
+}
+
+/* The brand logo is a standalone mark; its own pin and paper colors must remain visible. */
+.brand-icon {
+  background: transparent;
+  color: var(--brand-terracotta);
+  transform: none;
+}
+
+/* noise is painted behind content, never as an overlay over text.
+   Its supplied SVG already contains 9% alpha; do not apply opacity again.
+   Small style previews and thumbnail buttons deliberately keep only ruling. */
+body,
+.app.presenting {
+  background-image: var(--paper-noise);
+}
+.workspace {
+  background-image: var(--paper-noise);
+  background-size: auto;
+}
+.editable-card,
+.present-card,
+.stack-front,
+.stack-under,
+.example-paper,
+.example-paper-back {
+  background-image: var(--paper-noise);
+  background-size: auto;
+  background-position: 0 0;
+}
+.editable-card.style-lined,
+.present-card.style-lined,
+.stack-front.style-lined {
+  background-image:
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px), var(--paper-noise);
+  background-size:
+    100% var(--line-step),
+    auto;
+  background-position:
+    0 var(--pattern-y, 0px),
+    0 0;
+}
+.editable-card.style-grid,
+.present-card.style-grid,
+.stack-front.style-grid {
+  background-image:
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px),
+    linear-gradient(to right, var(--line) 1px, transparent 1px), var(--paper-noise);
+  background-size:
+    100% var(--line-step),
+    var(--line-step) 100%,
+    auto;
+  background-position:
+    0 var(--pattern-y, 0px),
+    0 0,
+    0 0;
+}

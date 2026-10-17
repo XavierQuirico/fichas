@@ -1,0 +1,157 @@
+/* Archive and delete actions, icon-button labels. */
+@media (hover: none) {
+  .deck-duplicate,
+  .deck-actions-row .deck-archive,
+  .deck-actions-row .deck-delete {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+.deck-delete svg {
+  transition:
+    rotate 0.2s,
+    scale 0.2s;
+}
+.deck-delete:hover svg {
+  rotate: -12deg;
+  scale: 1.12;
+}
+.deck-delete:active svg {
+  rotate: 10deg;
+  scale: 0.9;
+}
+.deck-delete svg path:first-child {
+  transform-origin: 50% 30%;
+  transition: transform 0.2s;
+}
+.deck-delete:hover svg path:first-child {
+  transform: translateY(-2px) rotate(-12deg);
+}
+
+/* Accessible names for icon-only actions. */
+.icon-button[aria-label] {
+  position: relative;
+  overflow: visible;
+}
+.icon-button[aria-label]::after {
+  content: attr(aria-label);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 7px);
+  transform: translate(-50%, 4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 50;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--ink-primary);
+  color: var(--ink-on-brand);
+  font: var(--text-caption);
+  box-shadow: var(--shadow-raised);
+  transition:
+    opacity var(--dur-hover) var(--ease-move),
+    transform var(--dur-hover) var(--ease-spring);
+}
+.icon-button[aria-label]:hover::after,
+.icon-button[aria-label]:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.deck-item .icon-button[data-tooltip]::after {
+  content: attr(data-tooltip);
+}
+.deck-cover-topline .deck-duplicate.icon-button {
+  position: absolute;
+}
+.deck-item .deck-duplicate::after {
+  top: calc(100% + 7px);
+  right: 0;
+  bottom: auto;
+  left: auto;
+  transform: translateY(-4px);
+}
+.deck-item .deck-duplicate:hover::after,
+.deck-item .deck-duplicate:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.deck-actions-row .icon-button::after {
+  right: 0;
+  left: auto;
+  transform: translateY(4px);
+}
+.deck-actions-row .icon-button:hover::after,
+.deck-actions-row .icon-button:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+.deck-item.insert-before::before,
+.deck-item.insert-after::after,
+.thumb-item.insert-before::before,
+.thumb-item.insert-after::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background:
+    linear-gradient(var(--brand-terracotta), var(--brand-terracotta)) center/4px 100% no-repeat,
+    radial-gradient(circle, var(--brand-terracotta) 0 7px, transparent 8px) center/18px 18px
+      no-repeat;
+  border-radius: var(--radius-sm);
+  z-index: 21;
+  box-shadow: var(--shadow-rest);
+}
+.deck-item.insert-before::before {
+  left: -15px;
+}
+.deck-item.insert-after::after {
+  right: -15px;
+}
+.thumb-item.insert-before::before {
+  left: -8px;
+}
+.thumb-item.insert-after::after {
+  right: -8px;
+}
+.stack-count {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 25px;
+  width: 32px;
+}
+.stack-count b {
+  position: absolute;
+  right: 0;
+  top: -3px;
+  min-width: 19px;
+  height: 19px;
+  border-radius: var(--radius-sm);
+  background: var(--ink-primary);
+  color: var(--ink-on-brand);
+  font: var(--text-caption);
+  letter-spacing: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--paper);
+}
+.archive-filter {
+  display: flex;
+  justify-content: flex-end;
+  margin: -18px 0 var(--space-4);
+}
+.archive-filter button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+  padding: var(--space-2);
+}
+.archive-filter button[aria-pressed='true'] {
+  background: var(--brand-terracotta-tint);
+  border-radius: var(--radius-md);
+}

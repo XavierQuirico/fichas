@@ -1,0 +1,376 @@
+/* Deck cards and their covers. */
+/* Native scrolling wins until a stationary hold explicitly starts sorting. */
+[data-sort-id] {
+  touch-action: auto !important;
+  -webkit-touch-callout: none;
+}
+.deck-item button,
+.thumb-item button {
+  -webkit-user-select: none;
+  user-select: none;
+}
+.filmstrip {
+  overflow-y: hidden;
+}
+
+/* restore the original Sticky character and distinguish card texture. */
+.editable-card,
+.present-card,
+.stack-front {
+  background-blend-mode: multiply;
+}
+.editable-card.style-sticky,
+.present-card.style-sticky,
+.stack-front.style-sticky {
+  border-radius: 3px 3px 22px 3px;
+  box-shadow:
+    0 22px 26px -15px #43493866,
+    inset 0 clamp(30px, 5dvh, 43px) 0 #ffffff50;
+}
+.style-sample.style-sticky {
+  border-radius: 3px 3px 22px 3px;
+  box-shadow:
+    0 6px 6px -3px #43493844,
+    inset 0 8px 0 #ffffff50;
+}
+.thumb.style-sticky {
+  border-radius: 3px 3px 12px 3px;
+  box-shadow: inset 0 10px 0 #ffffff50 !important;
+}
+
+/* component states. */
+.button:not(:disabled):hover,
+.icon-button:not(:disabled):hover {
+  box-shadow: var(--shadow-raised);
+}
+.button:not(:disabled):active,
+.icon-button:not(:disabled):active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: var(--shadow-rest);
+}
+.button:disabled,
+.icon-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.icon-button:not(:disabled):hover {
+  background: var(--brand-terracotta-tint);
+  color: var(--brand-terracotta);
+}
+.style-option:hover:not(:disabled),
+.font-options button:hover:not(:disabled) {
+  border-color: var(--brand-terracotta);
+  background: var(--brand-terracotta-tint);
+}
+.style-option:active:not(:disabled),
+.font-options button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.font-options button[aria-pressed='true']::after {
+  content: '✓';
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  color: var(--brand-terracotta);
+  font-weight: 700;
+}
+@media (max-width: 740px) {
+  .style-options,
+  .font-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.mobile-design-toggle {
+  display: none;
+}
+.card-title-input,
+.card-body-input {
+  scrollbar-width: thin;
+}
+@media (max-width: 740px) {
+  .editing .editor-layout {
+    position: relative;
+    grid-template-rows: minmax(0, 1fr) 56px;
+  }
+  .customize {
+    padding: 0 var(--space-4);
+    height: 56px;
+    overflow: hidden;
+    z-index: 25;
+    background: var(--paper-base);
+  }
+  .customize .panel-heading {
+    display: none;
+  }
+  .customize:not(.mobile-expanded) .design-panel,
+  .customize:not(.mobile-expanded) .editor-tip,
+  .customize:not(.mobile-expanded) > .hint {
+    display: none;
+  }
+  .customize.mobile-expanded {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: min(78%, 520px);
+    max-height: 100%;
+    overflow-y: auto;
+    border-top: 1px solid var(--paper-line);
+    box-shadow: var(--shadow-raised);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .mobile-design-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 55px;
+    position: sticky;
+    top: 0;
+    background: var(--paper-base);
+    z-index: 2;
+    text-align: left;
+    font: var(--text-body-md);
+    font-weight: 600;
+  }
+  .mobile-design-toggle small {
+    display: inline-block;
+    font: var(--text-caption);
+    font-weight: 400;
+    color: var(--ink-secondary);
+    margin-left: var(--space-2);
+  }
+  .customize .design-label {
+    display: none;
+  }
+  .customize .design-panel {
+    padding-bottom: var(--space-2);
+  }
+  .workspace .filmstrip {
+    max-height: 101px;
+  }
+  .workspace .thumb {
+    height: 54px;
+  }
+  .workspace .thumb-label {
+    font: var(--text-caption);
+  }
+  .workspace .thumb-wrap {
+    padding: 3px;
+  }
+  .workspace .card-body-input {
+    min-height: 0;
+  }
+  .customize .editor-tip {
+    display: none;
+  }
+  .deck-heading p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Keep thumbnail labels and selection borders inside the visible rail. */
+.workspace .filmstrip,
+.presentation .filmstrip {
+  max-height: none;
+}
+
+/* Only the narrow exit edge reserves horizontal gestures; the filmstrip stays native. */
+.edge-swipe-zone {
+  display: none;
+}
+@media (max-width: 740px) {
+  .edge-swipe-zone {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 15;
+    touch-action: pan-y;
+  }
+}
+
+/* native fullscreen, preserving the chosen navigation. */
+.presentation-header .exit-button {
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-line);
+  box-shadow: var(--shadow-rest);
+  color: var(--ink-secondary);
+}
+.is-fullscreen .presentation-header h1,
+.is-fullscreen .gesture-tip {
+  display: none;
+}
+.is-fullscreen .present-navigation {
+  justify-content: center;
+  position: relative;
+}
+.is-fullscreen .thumbs-toggle {
+  position: absolute;
+  right: 0;
+}
+
+/* the native request is also available on mobile. */
+@media (max-width: 740px) {
+  .fullscreen-button {
+    display: inline-flex;
+  }
+}
+
+/* fixed paper geometry and opaque movable cards. */
+.stack-front,
+.stack-under {
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+.deck-item {
+  isolation: isolate;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-rest);
+  transition:
+    transform var(--dur-release) var(--ease-move),
+    box-shadow var(--dur-release) var(--ease-move);
+}
+.deck-item:hover,
+.deck-item:focus-within {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lifted);
+}
+.deck-card-layout {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #ffffff;
+  pointer-events: none;
+}
+.deck-open-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.deck-open-hit:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+.deck-cover-topline {
+  position: relative;
+  min-height: 18px;
+  padding-right: calc(42px + var(--space-3));
+  display: flex;
+  align-items: center;
+}
+.deck-cover .cover-caption {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--space-2);
+  padding: 0;
+  white-space: nowrap;
+}
+.cover-index {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deck-info {
+  background: #ffffff;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  padding: var(--space-4);
+  min-height: 106px;
+}
+.deck-info-bottom {
+  min-width: 0;
+  min-height: 42px;
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.deck-info .deck-card-count {
+  min-width: 0;
+  margin-top: 0;
+  flex: 1 1 auto;
+  white-space: nowrap;
+}
+.deck-actions-row {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  pointer-events: auto;
+}
+.deck-duplicate,
+.deck-actions-row .deck-archive,
+.deck-actions-row .deck-delete {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--ink-secondary);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-hover) var(--ease-move),
+    transform var(--dur-hover) var(--ease-spring),
+    background var(--dur-hover) var(--ease-move),
+    color var(--dur-hover) var(--ease-move);
+}
+.deck-duplicate {
+  position: absolute;
+  top: 50%;
+  right: calc(-1px - var(--space-2));
+  bottom: auto;
+  z-index: 2;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+.deck-actions-row .deck-archive,
+.deck-actions-row .deck-delete {
+  position: relative;
+  inset: auto;
+}
+.deck-item:hover .deck-duplicate,
+.deck-item:hover .deck-archive,
+.deck-item:hover .deck-delete,
+.deck-item:focus-within .deck-duplicate,
+.deck-item:focus-within .deck-archive,
+.deck-item:focus-within .deck-delete,
+.deck-item.is-lifted .deck-duplicate,
+.deck-item.is-lifted .deck-archive,
+.deck-item.is-lifted .deck-delete {
+  opacity: 1;
+  pointer-events: auto;
+}
+.deck-item.is-lifted .deck-open-hit,
+.deck-item.is-lifted .deck-duplicate,
+.deck-item.is-lifted .deck-archive,
+.deck-item.is-lifted .deck-delete {
+  pointer-events: none;
+}
+.deck-duplicate:hover,
+.deck-duplicate:active,
+.deck-actions-row .deck-archive:hover,
+.deck-actions-row .deck-archive:active,
+.deck-actions-row .deck-delete:hover,
+.deck-actions-row .deck-delete:active {
+  color: var(--brand-terracotta);
+  background: var(--paper-base);
+}

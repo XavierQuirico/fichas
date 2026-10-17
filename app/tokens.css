@@ -1,0 +1,110 @@
+/* Fichas — tokens v3 (traducción 1:1 de tokens.json). Nada queda provisional. */
+:root {
+  --brand-terracotta: #c1592f;
+  --brand-terracotta-hover: #a84a26;
+  --brand-terracotta-tint: #f3ddd1;
+
+  --paper-base: #f5f4ea;
+  --paper-raised: #edeadc;
+  --paper-line: #dedac4;
+
+  --ink-primary: #332a22;
+  --ink-secondary: #6b5f4f;
+  --ink-on-brand: #fff8f0;
+
+  --signal-warning: #d97b3f;
+  --signal-warning-bg: #fbeadd;
+  --signal-danger: #b33d3d;
+  --signal-danger-hover: #962f2f;
+  --signal-success: #4e8a57;
+
+  --paper-lemon: #f8e779;
+  --cover-lemon: #efeeda;
+  --paper-blue: #9fc9de;
+  --cover-blue: #e5edf1;
+  --paper-peach: #f6c4a3;
+  --cover-peach: #f3e7df;
+  --paper-green: #b9dfb0;
+  --cover-green: #e6efe3;
+  --paper-lilac: #d3c4e8;
+  --cover-lilac: #efebf3;
+  --paper-white: #ffffff;
+  --cover-white: #f5f4ea;
+  --stage-blue-mist: var(--cover-blue);
+  --stage-lilac-mist: var(--cover-lilac);
+  --stage-ink: #332a22;
+  --stage-orange: #d97b3f;
+  --stage-red: #b33d3d;
+  --ficha-white-border: 2px solid var(--ink-secondary); /* hairline obligatorio, min 2px — nunca paper-line */
+
+  /* Textura de papel: grano SVG, 9% de opacidad, tile 128px. Fondo general y superficie de fichas; nunca sobre texto ni botones pequeños */
+  --paper-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  --font-display: 'Fredoka', 'Baloo 2', 'Quicksand', sans-serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+  --font-handwritten: 'Nunito Sans', 'Caveat', 'Kalam', cursive; /* usar itálica 600 */
+  --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
+
+  --text-display-lg: 600 48px/1.05 var(--font-display);
+  --text-display-md: 600 32px/1.1 var(--font-display);
+  --text-display-sm: 500 24px/1.15 var(--font-display);
+  --text-body-lg: 400 18px/1.5 var(--font-body);
+  --text-body-md: 400 15px/1.5 var(--font-body);
+  --text-body-sm: 500 13px/1.4 var(--font-body);
+  --text-caption: 400 11px/1.3 var(--font-mono);
+  --tracking-caption: 0.03em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --shadow-rest: 0 1px 2px rgba(51, 42, 34, 0.08);
+  --shadow-raised: 0 4px 10px rgba(51, 42, 34, 0.12);
+  --shadow-lifted: 0 12px 24px rgba(51, 42, 34, 0.18);
+
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-move: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-hover: 140ms;
+  --dur-press: 100ms;
+  --dur-release: 200ms;
+  --dur-panel: 280ms;
+  --dur-drop: 350ms;
+  --dur-screen: 250ms;
+  --dur-celebration: 800ms;
+  --stagger-celebration: 50ms;
+
+  --focus-ring: 2px solid var(--brand-terracotta);
+  --focus-offset: 2px;
+
+  /* Movimiento idle de la capa gráfica (acentos decorativos, nunca UI funcional) */
+  --idle-float-amplitude: 4px;
+  --idle-float-duration: 3800ms;
+  --idle-rotate-amplitude: 6deg;
+  --idle-rotate-duration: 5400ms;
+}
+@media (max-width: 640px) {
+  :root {
+    --text-display-lg: 600 36px/1.05 var(--font-display);
+    --text-display-md: 600 26px/1.1 var(--font-display);
+  }
+}
+
+/* User-approved exception: restore pre-redesign ruling colors exactly. */
+:root {
+  --pattern-line-lemon: #aa8f282b;
+  --pattern-line-peach: #b2683f2b;
+  --pattern-line-blue: #58758e2b;
+  --pattern-line-mint: #4785672b;
+  --pattern-line-lilac: #73619b2b;
+  --pattern-line-white: #8d95842b;
+}

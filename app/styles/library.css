@@ -1,0 +1,293 @@
+/* Library screen: deck covers, stacks, new-deck tile and starter examples. */
+.cover-lemon {
+  background: var(--cover-lemon);
+}
+.cover-blue {
+  background: var(--cover-blue);
+}
+.cover-peach {
+  background: var(--cover-peach);
+}
+.cover-mint {
+  background: var(--cover-green);
+}
+.cover-lilac {
+  background: var(--cover-lilac);
+}
+.cover-white {
+  background: var(--cover-white);
+}
+.cover-caption {
+  font: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: var(--ink-secondary);
+}
+.stack {
+  width: 76%;
+  height: 178px;
+  position: relative;
+  margin: var(--space-6) auto 0;
+}
+.stack-under {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-line);
+}
+.stack-under.second {
+  transform: rotate(8deg) translate(10px, 5px);
+}
+.stack-under.first {
+  transform: rotate(-7deg) translate(-4px, 1px);
+  background: var(--paper-base);
+}
+.stack-front {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-6) !important;
+  transform: rotate(-2deg);
+  border-radius: var(--radius-sm) !important;
+  transition: transform 0.25s;
+}
+.deck-open:hover .stack-front {
+  transform: rotate(1deg) translateY(-7px);
+}
+.stack-front strong {
+  font-size: 23px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  display: block;
+  margin: var(--space-3) 0 var(--space-2);
+  max-height: 55px;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.stack-front p {
+  font-size: 12px;
+  line-height: 1.4;
+  max-height: 35px;
+  overflow: hidden;
+}
+.mini-eyebrow {
+  font: var(--text-caption);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.cover-open {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: var(--paper-base);
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  border-radius: var(--radius-full);
+}
+.deck-info {
+  padding: var(--space-4) var(--space-12) var(--space-2) 2px;
+}
+.deck-info h2 {
+  font: var(--text-body-lg);
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.deck-info p {
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+  margin-top: var(--space-2);
+}
+.deck-info p span {
+  padding: 0 var(--space-1);
+}
+.deck-delete {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  color: var(--ink-secondary);
+}
+.new-deck {
+  min-height: 352px;
+  background: none;
+  border: 1.5px dashed var(--paper-line);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8);
+  gap: var(--space-3);
+  color: var(--ink-primary);
+}
+.new-deck:hover {
+  background: var(--paper-raised);
+  border-color: var(--paper-line);
+}
+.new-icon {
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+  display: grid;
+  place-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-1);
+}
+.new-deck h2 {
+  font: var(--text-body-lg);
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  max-width: 240px;
+}
+.new-deck p {
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+  line-height: 1.5;
+  max-width: 225px;
+}
+.text-link {
+  font: var(--text-body-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.example-item {
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-6);
+  grid-column: span 1;
+}
+.example-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: var(--text-caption);
+  color: var(--ink-secondary);
+}
+.example-tag {
+  letter-spacing: 1px;
+  font: var(--text-caption);
+  font-weight: 700;
+}
+.example-papers {
+  position: relative;
+  height: 204px;
+  margin: var(--space-4) var(--space-3) var(--space-3);
+}
+.example-paper-back {
+  position: absolute;
+  inset: 7px -4px;
+  background: var(--paper-blue);
+  transform: rotate(7deg);
+  border-radius: var(--radius-sm);
+}
+.example-paper {
+  position: absolute;
+  inset: 0;
+  background: var(--paper-lemon);
+  transform: rotate(-5deg);
+  padding: var(--space-6);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-raised);
+}
+.example-paper > span {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.example-paper strong {
+  display: block;
+  font-size: 29px;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
+  margin: var(--space-3) 0;
+}
+.example-paper p {
+  font-size: 12px;
+}
+.example-item h2 {
+  font: var(--text-body-lg);
+  letter-spacing: -0.5px;
+  margin-top: var(--space-6);
+}
+.example-item > p {
+  font: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin: var(--space-2) 0 var(--space-4);
+}
+.example-item .button {
+  width: 100%;
+}
+.first-deck {
+  min-height: 460px;
+  grid-column: span 2;
+  background: var(--paper-raised);
+}
+.first-deck h2 {
+  font: var(--text-display-sm);
+  max-width: 280px;
+}
+.first-deck .new-icon {
+  width: 77px;
+  height: 77px;
+}
+.library-note {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+  gap: var(--space-4);
+}
+.library-note > span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.library-note > span:last-child {
+  font: var(--text-caption);
+  letter-spacing: 0.3px;
+}
+.loading-state {
+  display: grid;
+  place-items: center;
+  gap: var(--space-4);
+  padding: 90px 0;
+  color: var(--ink-secondary);
+}
+.error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: var(--signal-warning-bg);
+  color: var(--ink-primary);
+  padding: var(--space-3) var(--space-4);
+  font: var(--text-body-sm);
+}
+.error-banner button {
+  text-decoration: underline;
+  font-weight: 700;
+  background: none;
+}
+.editor {
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: var(--space-6) 4% var(--space-8);
+}
+.editor-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}

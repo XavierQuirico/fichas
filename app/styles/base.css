@@ -1,0 +1,287 @@
+/* Theme wiring, reset, buttons, top bar and save status. */
+:root {
+  --background: var(--paper-base);
+  --foreground: var(--ink-primary);
+  --card: var(--paper-base);
+  --card-foreground: var(--ink-primary);
+  --popover: var(--paper-base);
+  --popover-foreground: var(--ink-primary);
+  --primary: var(--brand-terracotta);
+  --primary-foreground: var(--ink-on-brand);
+  --secondary: var(--paper-raised);
+  --secondary-foreground: var(--ink-primary);
+  --muted: var(--paper-raised);
+  --muted-foreground: var(--ink-secondary);
+  --accent: var(--brand-terracotta-tint);
+  --accent-foreground: var(--ink-primary);
+  --destructive: var(--signal-danger);
+  --border: var(--paper-line);
+  --input: var(--paper-line);
+  --ring: var(--brand-terracotta);
+  --radius: var(--radius-md);
+  --font-sans: var(--font-body);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-xl: var(--radius-lg);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font: var(--text-body-md);
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+button,
+input,
+textarea {
+  outline-offset: 5px;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--brand-terracotta);
+}
+button {
+  transition:
+    background 0.16s,
+    box-shadow 0.16s,
+    transform 0.16s;
+}
+svg {
+  flex-shrink: 0;
+}
+h1,
+h2,
+p {
+  margin: 0;
+}
+button {
+  border: 0;
+}
+input,
+textarea {
+  color: inherit;
+}
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.topbar {
+  height: 82px;
+  border-bottom: 1px solid var(--border);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper-base);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  font: var(--text-display-sm);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+.brand-dot {
+  color: var(--brand-terracotta);
+  margin-left: -9px;
+}
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 38px;
+  background: var(--brand-terracotta);
+  color: var(--ink-on-brand);
+  border-radius: var(--radius-md);
+  transform: rotate(-8deg);
+}
+.topbar-right {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+.save-status {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+}
+.save-status.bad {
+  color: var(--signal-danger);
+}
+.icon-button {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+.icon-button:hover {
+  background: var(--paper-raised);
+}
+.icon-button.active {
+  background: var(--brand-terracotta-tint);
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 46px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font: var(--text-body-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.primary {
+  background: var(--brand-terracotta);
+  color: var(--ink-on-brand);
+  box-shadow: var(--shadow-rest);
+}
+.primary:hover {
+  background: var(--brand-terracotta-hover);
+}
+.secondary {
+  background: var(--paper-base);
+  border: 1px solid var(--paper-line);
+}
+.secondary:hover {
+  background: var(--paper-base);
+}
+.library {
+  max-width: 1380px;
+  padding: var(--space-16) 5% var(--space-8);
+  margin: auto;
+}
+.library-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.eyebrow {
+  font: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--ink-secondary);
+}
+.library h1 {
+  font: var(--text-display-lg);
+  letter-spacing: -1.7px;
+  margin: var(--space-3) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.count {
+  font: var(--text-body-md);
+  letter-spacing: 0;
+  background: var(--paper-raised);
+  border-radius: var(--radius-full);
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  font-weight: 500;
+}
+.intro {
+  color: var(--ink-secondary);
+  font: var(--text-body-md);
+}
+.decks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+.deck-item {
+  position: relative;
+  min-width: 0;
+}
+.deck-open {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  padding: 0;
+}
+.deck-cover {
+  height: 275px;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-6);
+  background: var(--paper-base);
+}
+.deck-cover::before {
+  content: '';
+  position: absolute;
+  inset: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--cover-white);
+  z-index: 0;
+}
+.deck-cover.cover-lemon::before {
+  background: var(--cover-lemon);
+}
+.deck-cover.cover-blue::before {
+  background: var(--cover-blue);
+}
+.deck-cover.cover-peach::before {
+  background: var(--cover-peach);
+}
+.deck-cover.cover-mint::before {
+  background: var(--cover-green);
+}
+.deck-cover.cover-lilac::before {
+  background: var(--cover-lilac);
+}
+.deck-cover.cover-white::before {
+  background: var(--cover-white);
+}
+.deck-cover > * {
+  position: relative;
+  z-index: 1;
+}

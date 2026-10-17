@@ -1,0 +1,452 @@
+/* Dialogs, switches, hover and press feedback, guide and onboarding. */
+/* restrained, consistent feedback across controls. */
+.cover-open {
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.deck-open:hover .cover-open {
+  background: var(--paper-base);
+  transform: scale(1.08);
+  box-shadow: var(--shadow-raised);
+}
+.deck-open:active .cover-open {
+  transform: scale(0.94);
+}
+.count {
+  background: none;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  gap: var(--space-2);
+  font: var(--text-body-md);
+  transition: transform 0.2s;
+  animation: count-arrive 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.3);
+}
+.count:hover {
+  transform: rotate(-4deg) scale(1.05);
+}
+.mini-stack {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+.mini-stack i {
+  position: absolute;
+  width: 15px;
+  height: 17px;
+  border: 1.25px solid currentColor;
+  background: var(--paper-raised);
+  border-radius: var(--radius-sm);
+  top: 3px;
+  left: 3px;
+}
+.mini-stack i:first-child {
+  transform: rotate(-16deg) translate(-3px, 0);
+}
+.mini-stack i:nth-child(2) {
+  transform: rotate(9deg) translate(2px, -1px);
+}
+.mini-stack i:last-child {
+  background: var(--paper-raised);
+  transform: rotate(-3deg);
+}
+.mini-eyebrow {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.mini-eyebrow .mini-stack {
+  width: 18px;
+  height: 18px;
+  transform: scale(0.8);
+  transform-origin: left center;
+}
+.deck-card-count {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.deck-card-count .mini-stack {
+  transform: scale(0.75);
+  width: 18px;
+  height: 18px;
+  transform-origin: left center;
+}
+.new-exposure-button {
+  transition:
+    background 0.18s,
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+.new-exposure-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-raised);
+}
+.new-exposure-button:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+.new-exposure-button:focus-visible {
+  outline-offset: 5px;
+  transform: translateY(-2px);
+}
+.new-icon svg {
+  animation: plus-breathe 4s ease-in-out infinite;
+}
+.new-deck:hover .new-icon {
+  transform: rotate(-5deg);
+  transition: transform 0.2s;
+}
+.help-button {
+  color: var(--brand-terracotta);
+  background: var(--paper-raised);
+}
+.help-button svg {
+  transition: transform 0.3s;
+}
+.help-button:hover {
+  background: var(--paper-raised);
+}
+.help-button:hover svg {
+  transform: rotate(35deg);
+}
+.help-button:active svg {
+  transform: rotate(60deg) scale(0.9);
+}
+.help-dialog[data-state='open'] {
+  animation: help-arrive 0.28s cubic-bezier(0.18, 0.8, 0.28, 1.1);
+}
+.help-dialog li > span {
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+}
+.help-dialog li:nth-child(2) > span {
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+}
+.help-dialog li:nth-child(3) > span {
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+}
+.canvas-hint > span {
+  display: block;
+  white-space: nowrap;
+  clip-path: inset(0 0 0 0);
+  animation: type-instruction 9s steps(31, end) infinite;
+}
+.settings-button,
+.text-size-button {
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-line);
+  color: var(--ink-secondary);
+}
+.settings-button:hover {
+  background: var(--paper-raised);
+}
+.settings-button svg {
+  transition: transform 0.28s;
+}
+.settings-button:hover svg,
+.settings-button[aria-expanded='true'] svg {
+  transform: rotate(18deg);
+}
+.text-size-button svg {
+  transition: transform 0.2s;
+}
+.text-size-button:hover svg {
+  transform: scale(1.16);
+}
+.text-size-button.active {
+  background: var(--brand-terracotta-tint);
+  border-color: var(--brand-terracotta);
+}
+.branded-switch-row [role='switch'] {
+  width: 47px;
+  height: 27px;
+  border: 1px solid var(--paper-line);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-rest);
+  flex: 0 0 47px;
+  overflow: hidden;
+  transition:
+    background 0.22s,
+    box-shadow 0.22s;
+}
+.branded-switch-row [role='switch'][data-state='checked'] {
+  background: var(--brand-terracotta-tint);
+  border-color: var(--brand-terracotta);
+  box-shadow: var(--shadow-rest);
+}
+.branded-switch-row [data-slot='switch-thumb'] {
+  width: 21px;
+  height: 21px;
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-rest);
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.2, 1.2);
+}
+.branded-switch-row [data-slot='switch-thumb'][data-state='checked'] {
+  transform: translateX(19px);
+}
+.settings-done svg {
+  transition: transform 0.2s;
+}
+.settings-done:hover svg {
+  transform: rotate(-9deg) scale(1.15);
+}
+.settings-done:active {
+  transform: scale(0.97) !important;
+}
+.nav-arrow {
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+  border: 1px solid var(--paper-line);
+  box-shadow: var(--shadow-rest);
+  transition:
+    transform 0.16s,
+    background 0.16s,
+    box-shadow 0.16s;
+}
+.nav-arrow svg {
+  transition: transform 0.18s;
+}
+.nav-next:hover:not(:disabled) svg {
+  transform: translateX(4px);
+}
+.nav-previous:hover:not(:disabled) svg {
+  transform: translateX(-4px);
+}
+.nav-arrow:hover:not(:disabled) {
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-raised);
+}
+.nav-arrow:active:not(:disabled) {
+  transform: translateY(2px) scale(0.96) !important;
+  box-shadow: var(--shadow-rest);
+}
+.thumbs-toggle {
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-2);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.thumbs-toggle svg {
+  transition: transform 0.23s;
+}
+.thumbs-toggle:hover {
+  background: var(--paper-base);
+  color: var(--brand-terracotta);
+}
+.thumbs-toggle[aria-pressed='true'] svg {
+  transform: translateY(-2px);
+}
+.collapsible-filmstrip > div {
+  transition:
+    translate 0.24s,
+    opacity 0.2s;
+  translate: 0 9px;
+  opacity: 0;
+}
+.collapsible-filmstrip.expanded > div {
+  translate: 0 0;
+  opacity: 1;
+}
+.finish-check {
+  animation: finish-pop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1.3);
+}
+.finish-card .button:hover {
+  translate: 0 -2px;
+  box-shadow: var(--shadow-raised);
+}
+.finish-card .button:active {
+  translate: 0 1px;
+  scale: 0.97;
+}
+.exit-button:hover {
+  background: var(--paper-raised);
+  border-color: var(--paper-line);
+}
+.exit-button svg {
+  transition: transform 0.2s;
+}
+.exit-button:hover svg {
+  transform: rotate(90deg);
+}
+.exit-button:active {
+  scale: 0.96;
+}
+@keyframes count-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(6px) rotate(-9deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes plus-breathe {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  82% {
+    transform: scale(1.12);
+  }
+  90% {
+    transform: scale(0.97);
+  }
+}
+@keyframes help-arrive {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+    rotate: -2deg;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+    scale: 1;
+  }
+}
+@keyframes type-instruction {
+  0%,
+  5% {
+    clip-path: inset(0 100% 0 0);
+  }
+  35%,
+  88% {
+    clip-path: inset(0 0 0 0);
+  }
+  100% {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes finish-pop {
+  0% {
+    opacity: 0;
+    scale: 0.6;
+    rotate: -20deg;
+  }
+  65% {
+    opacity: 1;
+    scale: 1.1;
+    rotate: 4deg;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    rotate: -10deg;
+  }
+}
+/* presentation controls and real deck previews. */
+.presentation .card-topline {
+  justify-content: flex-end;
+}
+.presentation .card-bottomline {
+  justify-content: flex-start;
+}
+.presentation {
+  overscroll-behavior-x: contain;
+  touch-action: auto;
+}
+.edge-exit-hint {
+  position: fixed;
+  left: 0;
+  top: 48%;
+  width: 36px;
+  height: 46px;
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  box-shadow: var(--shadow-rest);
+  pointer-events: none;
+}
+.stack-under.second,
+.stack-under.first {
+  background: var(--paper);
+}
+@media (max-width: 740px) {
+  .exit-button > span {
+    display: none;
+  }
+  .presentation-header .exit-button {
+    width: 42px;
+    padding: var(--space-2);
+  }
+  .presentation-header h1 {
+    max-width: 46vw;
+  }
+}
+/* tutorial and finished example retain distinct roles. */
+.first-deck {
+  grid-column: span 1;
+}
+.tutorial-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--brand-terracotta);
+  color: var(--ink-on-brand);
+  border-radius: var(--radius-sm);
+  font: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: var(--space-1) var(--space-2);
+  line-height: 1.2;
+}
+.cover-caption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.guide-example .example-paper {
+  background: var(--paper-green);
+}
+.guide-example .example-paper-back {
+  background: var(--paper-peach);
+}
+.guide-example .example-paper > span {
+  font-size: 10px;
+}
+.onboarding-links {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-8);
+}
+.onboarding-links button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+  background: none;
+  border-bottom: 1px solid var(--paper-line);
+  padding: var(--space-2) 0;
+}
+.onboarding-links button:hover {
+  color: var(--brand-terracotta);
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .canvas-hint > span {
+    clip-path: none;
+  }
+}

@@ -1,0 +1,52 @@
+/* Sign-in and sign-up screens. */
+.auth-screen,
+.auth-setup-screen {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 32px 20px;
+  background: var(--paper-base);
+}
+.auth-brand {
+  width: min(360px, 100%);
+}
+.auth-brand > p {
+  margin: 14px 0 0;
+  color: var(--ink-secondary);
+  font: var(--text-body-lg);
+}
+.auth-setup-card {
+  width: min(440px, 100%);
+  padding: 32px;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-lg);
+  background: var(--paper-white);
+  box-shadow: var(--shadow-raised);
+}
+.auth-setup-card h1 {
+  margin: 0 0 10px;
+  color: var(--ink-primary);
+  font: var(--text-display-sm);
+}
+.auth-setup-card p {
+  color: var(--ink-secondary);
+  font: var(--text-body-md);
+}
+.auth-setup-card a {
+  color: var(--brand-terracotta);
+  font-weight: 700;
+}
+@media (max-width: 760px) {
+  .auth-screen {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .auth-brand {
+    width: min(440px, 100%);
+  }
+  .auth-setup-card {
+    padding: 24px;
+  }
+}

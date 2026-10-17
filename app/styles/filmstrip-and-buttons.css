@@ -1,0 +1,340 @@
+/* Filmstrip proportions and button states. */
+.deck-cover,
+.example-item,
+.customize,
+.editable-card.style-clean,
+.present-card.style-clean {
+  box-shadow: var(--shadow-rest);
+}
+.editable-card.style-sticky,
+.editable-card.style-lined,
+.editable-card.style-grid,
+.present-card.style-sticky,
+.present-card.style-lined,
+.present-card.style-grid,
+.stack-front,
+.example-paper,
+.finish-card,
+.present-text-control,
+.card-menu {
+  box-shadow: var(--shadow-raised);
+}
+.app-dialog,
+.customize.mobile-expanded,
+.present-card.is-dragging,
+.is-lifted {
+  box-shadow: var(--shadow-lifted);
+}
+
+/* Sticky keeps its light upper edge, and both
+   collection/card quantity badges use the brand orange. */
+.editable-card.style-sticky,
+.present-card.style-sticky,
+.stack-front.style-sticky {
+  border-radius: 3px 3px 22px 3px;
+  box-shadow:
+    0 22px 26px -15px #43493866,
+    inset 0 clamp(30px, 5dvh, 43px) 0 #ffffff50;
+}
+.style-sample.style-sticky {
+  border-radius: 3px 3px 22px 3px;
+  box-shadow:
+    0 6px 6px -3px #43493844,
+    inset 0 8px 0 #ffffff50;
+}
+.count b,
+.stack-count b {
+  background: var(--brand-terracotta);
+}
+
+/* Filmstrip previews follow the reference proportions while remaining compact. */
+.thumb-wrap {
+  width: 122px;
+  padding: var(--space-2);
+}
+.thumb {
+  height: 88px;
+  border-radius: var(--radius-md) !important;
+  padding: var(--space-3) var(--space-2);
+}
+.thumb strong {
+  font-size: 11px;
+}
+.thumb > span {
+  font-size: 8px;
+}
+
+/* exact proportions and physical button feedback. */
+.new-exposure-button,
+.present-button {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: var(--radius-full);
+  border: 0;
+  box-shadow: 0 4px 0 var(--brand-terracotta-hover);
+  transition:
+    transform 220ms var(--ease-spring),
+    box-shadow 220ms var(--ease-spring),
+    background 140ms ease;
+}
+.new-exposure-button:hover,
+.present-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--brand-terracotta-hover);
+}
+.new-exposure-button:active,
+.present-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--brand-terracotta-hover);
+}
+.action-icon {
+  display: inline-flex;
+  transform: rotate(var(--icon-rot, 0deg)) scale(var(--icon-scale, 1));
+  transition: transform 280ms var(--ease-spring);
+}
+.new-exposure-button:hover .action-icon {
+  --icon-rot: 90deg;
+  --icon-scale: 1.1;
+}
+.new-exposure-button:active .action-icon {
+  --icon-rot: 90deg;
+  --icon-scale: 0.82;
+}
+.branded-switch-row [role='switch'] {
+  width: 40px;
+  height: 24px;
+  flex: 0 0 40px;
+  border-radius: var(--radius-full);
+}
+.branded-switch-row [role='switch'][data-state='checked'] {
+  background: var(--brand-terracotta);
+}
+.branded-switch-row [data-slot='switch-thumb'] {
+  width: 20px;
+  height: 20px;
+  top: 2px;
+  left: 2px;
+  background: #ffffff;
+}
+.branded-switch-row [data-slot='switch-thumb'][data-state='checked'] {
+  transform: translateX(16px);
+  background: var(--ink-on-brand);
+}
+.filmstrip {
+  padding: var(--space-2) 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  gap: 10px;
+}
+.thumb-wrap {
+  width: 52px;
+  height: 68px;
+  padding: 0;
+  border-radius: var(--radius-md);
+}
+.thumb {
+  width: 52px;
+  height: 68px;
+  border-radius: 8px !important;
+  padding: 4px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+}
+.thumb strong {
+  font-size: 7px;
+  line-height: 1.1;
+}
+.thumb > span {
+  font-size: 6px;
+  line-height: 1.1;
+  margin: 0;
+}
+.thumb-wrap.selected {
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 0 0 4px var(--brand-terracotta);
+  background: transparent;
+}
+.add-thumb {
+  width: 52px;
+  height: 68px;
+  border-radius: 8px;
+}
+.deck-item.insert-before::before,
+.deck-item.insert-after::after,
+.thumb-item.insert-before::before,
+.thumb-item.insert-after::after {
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--brand-terracotta);
+  box-shadow: none;
+}
+.deck-item.insert-before::before,
+.thumb-item.insert-before::before {
+  left: -12px;
+}
+.deck-item.insert-after::after,
+.thumb-item.insert-after::after {
+  right: -12px;
+}
+.deck-item.insert-before::after,
+.deck-item.insert-after::before,
+.thumb-item.insert-before::after,
+.thumb-item.insert-after::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--brand-terracotta);
+  transform: translateY(-50%);
+  z-index: 22;
+}
+.deck-item.insert-before::after,
+.thumb-item.insert-before::after {
+  left: -16px;
+}
+.deck-item.insert-after::before,
+.thumb-item.insert-after::before {
+  right: -16px;
+}
+
+/* Filmstrip unificado: misma miniatura en edición y Exponer. */
+.workspace .filmstrip,
+.presentation .filmstrip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-height: none;
+  min-height: 84px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 4px 10px;
+  scrollbar-width: thin;
+}
+.workspace .thumb-item,
+.presentation .thumb-item {
+  flex: 0 0 52px;
+}
+.workspace .thumb-item,
+.presentation .thumb-item {
+  height: 88px;
+  overflow: visible;
+}
+.workspace .thumb-wrap,
+.presentation .thumb-wrap {
+  width: 52px;
+  height: 68px;
+  padding: 0;
+  overflow: visible;
+}
+.workspace .thumb,
+.presentation .thumb {
+  width: 52px;
+  height: 68px;
+  min-height: 68px;
+  padding: 4px 5px;
+  border-radius: 8px !important;
+}
+.workspace .thumb-label,
+.presentation .thumb-label {
+  margin-top: 6px;
+}
+.workspace .thumb-menu,
+.presentation .thumb-menu {
+  top: -6px;
+  right: -6px;
+}
+.workspace .add-thumb,
+.presentation .add-thumb {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 68px;
+}
+.collapsible-filmstrip {
+  overflow: visible;
+}
+.filmstrip,
+.collapsible-filmstrip,
+.collapsible-filmstrip > div {
+  overflow-y: visible !important;
+}
+.thumb strong,
+.thumb > span,
+.thumb-label,
+.deck-info h2,
+.deck-info p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+}
+.thumb strong {
+  color: var(--ink-primary);
+  max-width: 100%;
+}
+.thumb > span {
+  color: var(--ink-primary);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+.deck-info h2 {
+  color: var(--ink-primary);
+}
+.deck-info p {
+  color: var(--ink-secondary);
+}
+
+/* Button states for Nueva exposición / Exponer. */
+.new-exposure-button,
+.present-button {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 0;
+  background: #c1592f;
+  color: #fff8f0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 0 #a84a26;
+  transition:
+    transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 140ms ease;
+  --icon-rot: 0deg;
+  --icon-scale: 1;
+}
+.new-exposure-button:hover,
+.new-exposure-button:focus-visible,
+.present-button:hover,
+.present-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #a84a26;
+  --icon-rot: 90deg;
+  --icon-scale: 1.1;
+}
+.new-exposure-button:active,
+.present-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 #a84a26;
+  --icon-rot: 90deg;
+  --icon-scale: 0.82;
+  transition-duration: 100ms;
+}
+.new-exposure-button .action-icon,
+.present-button .action-icon {
+  display: flex;
+  transform: rotate(var(--icon-rot, 0deg)) scale(var(--icon-scale, 1));
+  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}

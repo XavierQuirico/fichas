@@ -1,0 +1,344 @@
+/* Count badges, new-deck tile, fonts and the closing card. */
+.new-deck {
+  background: var(--paper-raised);
+  border: 2px dashed var(--paper-line);
+  gap: var(--space-3);
+}
+.new-deck .new-icon {
+  background: var(--paper-raised);
+  border: 1px solid var(--paper-line);
+}
+.new-deck:hover {
+  border-color: var(--paper-line);
+  background: var(--paper-raised);
+}
+.new-deck:focus-visible {
+  outline: 3px solid var(--brand-terracotta);
+  outline-offset: 4px;
+}
+.help-dialog[data-state='open'] {
+  animation: help-centered 0.28s cubic-bezier(0.18, 0.8, 0.28, 1.1);
+}
+@keyframes help-centered {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* collection and card counts use distinct symbols. */
+.count {
+  position: relative;
+  width: 45px;
+  height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-secondary);
+}
+.count b {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background: var(--ink-primary);
+  color: var(--ink-on-brand);
+  border: 3px solid var(--background);
+  border-radius: var(--radius-md);
+  min-width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  font: var(--text-caption);
+  font-weight: 700;
+  line-height: 1;
+}
+.new-exposure-button > svg {
+  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+}
+.new-exposure-button:hover > svg {
+  transform: rotate(90deg) scale(1.15);
+}
+.new-exposure-button:active > svg {
+  transform: rotate(90deg) scale(0.85);
+}
+
+/* full-surface patterns, synchronized with the body baseline. */
+@font-face {
+  font-family: Kalam;
+  src: url('/fonts/Kalam-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.paper {
+  font-family: var(--paper-font, Arial, Helvetica, sans-serif);
+}
+.editable-card.style-lined,
+.present-card.style-lined,
+.stack-front.style-lined {
+  background-image: linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 100% var(--line-step);
+  background-position: 0 var(--pattern-y, 0px);
+}
+.editable-card.style-grid,
+.present-card.style-grid,
+.stack-front.style-grid {
+  background-image:
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px),
+    linear-gradient(to right, var(--line) 1px, transparent 1px);
+  background-size:
+    100% var(--line-step),
+    var(--line-step) 100%;
+  background-position:
+    0 var(--pattern-y, 0px),
+    0 0;
+}
+.paper .card-body-input,
+.paper .card-body-text {
+  background-image: none;
+  background-color: transparent;
+}
+.add-thumb {
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.add-thumb svg {
+  transition: transform 0.24s;
+}
+.add-thumb:hover {
+  background: var(--paper-raised);
+  border-color: var(--paper-line);
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+}
+.add-thumb:hover svg {
+  transform: rotate(90deg);
+}
+.add-thumb:active {
+  transform: scale(0.95) !important;
+  background: var(--paper-raised);
+}
+.add-thumb:focus-visible {
+  outline: 3px solid var(--brand-terracotta);
+  outline-offset: 2px;
+}
+.design-label {
+  font: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+}
+.font-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+.font-options button {
+  padding: var(--space-2) var(--space-1);
+  min-height: 42px;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  background: var(--paper-raised);
+  font-size: 15px;
+}
+.font-options button:hover {
+  background: var(--paper-raised);
+}
+.font-options button[aria-pressed='true'] {
+  border-color: var(--brand-terracotta);
+  background: var(--brand-terracotta-tint);
+  box-shadow: var(--shadow-rest);
+}
+.overflow-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: var(--signal-warning-bg);
+  color: var(--ink-primary);
+  border-color: var(--signal-warning);
+}
+.overflow-note svg {
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.editor-tip {
+  border-left: 3px solid var(--paper-line);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--paper-raised);
+  align-items: flex-start;
+}
+.editor-tip p {
+  font-style: italic;
+  font-family: var(--font-body);
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+}
+.tip-symbol {
+  font: var(--text-display-md);
+  color: var(--ink-secondary);
+}
+
+/* overflow guidance never participates in layout. */
+.present-scroll-hint {
+  position: absolute;
+  bottom: 43px;
+  right: 24px;
+  max-width: calc(100% - 48px);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-2);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-sm);
+  background: var(--paper-raised);
+  color: var(--ink-secondary);
+  box-shadow: var(--shadow-rest);
+  font-family: var(--font-body);
+  font: var(--text-caption);
+  line-height: 1.4;
+  pointer-events: none;
+  z-index: 3;
+}
+.presentation-stage {
+  overflow: visible;
+  isolation: isolate;
+}
+.presentation-bottom {
+  position: relative;
+  z-index: 2;
+}
+.finish-card {
+  background: var(--ink-primary);
+  color: var(--ink-on-brand);
+  border: 1px solid var(--ink-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+.finish-card .eyebrow {
+  color: var(--ink-on-brand);
+}
+.finish-card h2 {
+  font-family: var(--font-body);
+  font-style: italic;
+  letter-spacing: -1px;
+  color: var(--ink-on-brand);
+}
+.finish-card .finish-check {
+  background: var(--paper-lemon);
+  color: var(--ink-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+}
+.finish-card .secondary {
+  color: var(--ink-on-brand);
+  background: var(--ink-primary);
+}
+
+/* Full viewport backdrop and a closing card with the same geometry as every card. */
+.presenting {
+  width: 100%;
+  transition: background-color 0.25s;
+}
+.presentation-stage > .present-card {
+  width: 100%;
+  max-width: 780px;
+  height: 100%;
+  min-height: 0;
+  max-height: 760px;
+  flex-shrink: 1;
+}
+.presentation-stage > .finish-card {
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+  user-select: none;
+}
+.finish-card > .finish-topline {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--ink-secondary);
+  font: var(--text-caption);
+  letter-spacing: 1.4px;
+  color: var(--ink-on-brand);
+}
+.finish-card > .finish-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 0;
+  padding: var(--space-4) 0;
+  scrollbar-width: thin;
+}
+.finish-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin: auto 0;
+}
+.finish-card .finish-check {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+  transform: rotate(-8deg);
+}
+.finish-card h2 {
+  font-size: clamp(36px, 6dvh, 64px);
+  line-height: 1.03;
+  letter-spacing: -1.5px;
+  margin: 0;
+}
+.finish-message {
+  font: var(--text-body-md);
+  line-height: 1.5;
+  color: var(--ink-on-brand);
+  max-width: 280px;
+}
+.finish-card > .finish-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--ink-secondary);
+  flex-shrink: 0;
+}
+.finish-card .primary {
+  background: var(--brand-terracotta);
+  color: var(--ink-on-brand);
+  box-shadow: none;
+}
+.finish-card .primary:hover {
+  background: var(--brand-terracotta-hover);
+}
+.finish-card .secondary {
+  border-color: var(--ink-secondary);
+  background: transparent;
+  color: var(--ink-on-brand);
+}
+.finish-card .secondary:hover {
+  background: var(--ink-secondary);
+}

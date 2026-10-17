@@ -1,0 +1,289 @@
+/* Navigation arrows, preference rows and view-mode layout rules. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.preference-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--paper-line);
+}
+.preference-row label {
+  cursor: pointer;
+}
+.preference-row strong {
+  display: block;
+  font: var(--text-body-md);
+  font-weight: 600;
+}
+.preference-row span {
+  display: block;
+  font: var(--text-body-sm);
+  line-height: 1.5;
+  color: var(--ink-secondary);
+  margin-top: var(--space-1);
+}
+.optional-arrows,
+.collapsible-filmstrip {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.25s ease,
+    opacity 0.2s ease,
+    margin 0.25s ease;
+  visibility: hidden;
+}
+.optional-arrows.expanded,
+.collapsible-filmstrip.expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+}
+.optional-arrows > div,
+.collapsible-filmstrip > div {
+  min-height: 0;
+  overflow: hidden;
+}
+.optional-arrows > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.optional-arrows.expanded {
+  margin: var(--space-2) 0;
+}
+.optional-arrows .button {
+  min-height: 41px;
+  padding: var(--space-2) var(--space-4);
+  font: var(--text-body-sm);
+}
+.card-title-input {
+  resize: vertical;
+  min-height: 2.3em;
+  max-height: 5em;
+}
+.present-card {
+  height: clamp(280px, 49dvh, 520px);
+}
+.presentation-stage {
+  overflow: visible;
+}
+.presentation {
+  overflow: hidden;
+}
+.editor,
+.library {
+  animation: card-in 0.25s ease;
+}
+.style-option,
+.swatches button {
+  transition:
+    transform 0.18s,
+    background 0.18s,
+    border-color 0.18s;
+}
+.swatches button:hover {
+  transform: translateY(-3px);
+}
+.style-option:hover .style-sample {
+  transform: rotate(-4deg) translateY(-2px);
+}
+.style-sample {
+  transition: transform 0.2s;
+}
+.thumb-wrap:hover:not(.selected) {
+  transform: translateY(-3px);
+}
+.editable-card {
+  transition:
+    background-color 0.25s,
+    box-shadow 0.25s,
+    border-radius 0.25s;
+}
+.optional-arrows:not(.expanded) button,
+.collapsible-filmstrip:not(.expanded) button {
+  visibility: hidden;
+}
+@media (max-width: 740px) {
+  .presentation-header h1 {
+    max-width: 40vw;
+  }
+  .presentation-tools {
+    gap: 1px;
+  }
+  .present-card {
+    height: clamp(280px, 49dvh, 680px);
+  }
+  .optional-arrows .button {
+    min-height: 37px;
+    font: var(--text-caption);
+  }
+  .keyboard-hint {
+    font: var(--text-caption);
+  }
+  .thumb strong {
+    font-size: 10px;
+  }
+  .example-heading,
+  .cover-caption,
+  .mini-eyebrow {
+    font: var(--text-caption);
+  }
+  .thumb-label {
+    font: var(--text-caption);
+  }
+}
+.present-card {
+  height: min(600px, calc(100dvh - 300px));
+  min-height: 280px;
+}
+.thumbs-hidden .present-card {
+  height: min(720px, calc(100dvh - 190px));
+}
+.arrows-visible .present-card {
+  height: min(570px, calc(100dvh - 350px));
+}
+.arrows-visible.thumbs-hidden .present-card {
+  height: min(670px, calc(100dvh - 240px));
+}
+@media (max-width: 740px) {
+  .present-card {
+    height: calc(100dvh - 275px);
+  }
+  .thumbs-hidden .present-card {
+    height: calc(100dvh - 180px);
+  }
+  .arrows-visible .present-card {
+    height: calc(100dvh - 325px);
+  }
+  .arrows-visible.thumbs-hidden .present-card {
+    height: calc(100dvh - 230px);
+  }
+}
+.style-option,
+.apply-all,
+.custom-tabs [role='tab'],
+.field-label {
+  font: var(--text-body-sm);
+}
+.canvas-hint {
+  font: var(--text-body-sm);
+}
+.thumbs-toggle {
+  font: var(--text-body-sm);
+}
+.style-options {
+  gap: var(--space-2);
+}
+.presentation-tools .icon-button {
+  min-height: 44px;
+  min-width: 40px;
+}
+.swatches button {
+  min-width: 30px;
+  min-height: 30px;
+}
+.app-dialog [data-slot='dialog-description'] {
+  font: var(--text-body-sm);
+}
+.library-note {
+  font: var(--text-body-sm);
+}
+@media (max-width: 740px) {
+  .style-option {
+    font: var(--text-caption);
+  }
+  .topbar-right .icon-button {
+    width: 37px;
+  }
+  .presentation-tools .icon-button {
+    min-width: 35px;
+  }
+  .presentation-header h1 {
+    max-width: 36vw;
+  }
+  .presentation-header .button {
+    min-height: 44px;
+  }
+  .save-status {
+    font: var(--text-caption);
+  }
+  .canvas-top .eyebrow {
+    font: var(--text-caption);
+  }
+  .deck-heading p {
+    font: var(--text-caption);
+  }
+  .keyboard-hint {
+    font: var(--text-caption);
+  }
+  .card-bottomline {
+    font: var(--text-caption);
+  }
+}
+/* shared alignment and bounded work surfaces. */
+.topbar {
+  padding: 0;
+  display: block;
+}
+.topbar-inner {
+  height: 100%;
+  width: 100%;
+  max-width: 1380px;
+  margin: auto;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.library {
+  width: 100%;
+}
+.app.editing,
+.app.presenting {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.editing .topbar {
+  flex: 0 0 82px;
+}
+.editing .editor {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+.editing .editor-heading {
+  flex-shrink: 0;
+  margin-bottom: var(--space-4);
+}
+.editing .editor-layout {
+  flex: 1;
+  min-height: 0;
+}
+.workspace {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  overflow: hidden;
+}
+.card-stage {
+  min-height: 0;
+  padding: var(--space-4) var(--space-4) var(--space-2);
+}

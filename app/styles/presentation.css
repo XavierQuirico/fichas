@@ -1,0 +1,323 @@
+/* Presentation screen: stage, presented card, finish card and help dialog. */
+.editor-tip {
+  background: var(--paper-raised);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-top: var(--space-2);
+}
+.tip-symbol {
+  font-family: var(--font-body);
+  font: var(--text-display-lg);
+  line-height: 1;
+  color: var(--ink-secondary);
+}
+.editor-tip p {
+  font: var(--text-caption);
+  line-height: 1.6;
+  color: var(--ink-secondary);
+}
+.organize {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.organize .hint {
+  margin: 0 0 var(--space-1);
+}
+.danger-soft {
+  color: var(--signal-danger);
+  background: var(--signal-warning-bg);
+}
+.no-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-6);
+  color: var(--ink-secondary);
+  min-height: 330px;
+}
+.no-cards h2 {
+  font: var(--text-display-sm);
+}
+.app-dialog {
+  padding: var(--space-8) !important;
+  border-radius: var(--radius-lg) !important;
+  background: var(--paper-base) !important;
+}
+.app-dialog [data-slot='dialog-title'] {
+  font: var(--text-display-sm);
+  letter-spacing: -0.7px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.app-dialog [data-slot='dialog-description'] {
+  line-height: 1.6;
+}
+.input-label {
+  display: block;
+  font: var(--text-body-sm);
+  font-weight: 600;
+  margin: var(--space-2) 0;
+}
+.text-input {
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  font: var(--text-body-md);
+}
+.app-dialog form .button {
+  width: 100%;
+  margin-top: var(--space-6);
+}
+.delete-confirm {
+  background: var(--signal-danger) !important;
+  color: var(--ink-on-brand) !important;
+}
+.help-dialog ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.help-dialog li {
+  display: flex;
+  gap: var(--space-4);
+}
+.help-dialog li > span {
+  color: var(--ink-secondary);
+  background: var(--paper-raised);
+  font: var(--text-body-sm);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.help-dialog strong {
+  font: var(--text-body-md);
+}
+.help-dialog li p {
+  font: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  margin-top: var(--space-1);
+}
+.presenting {
+  min-height: 100dvh;
+  background: var(--paper-raised);
+  overflow: hidden;
+}
+.presentation {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 1450px;
+  margin: auto;
+}
+.presentation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 4%;
+  flex-shrink: 0;
+}
+.presentation-header > div:not(.presentation-tools) {
+  text-align: center;
+  min-width: 0;
+}
+.presentation-header h1 {
+  font: var(--text-body-md);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 60vw;
+}
+.presentation-header p {
+  font: var(--text-caption);
+  color: var(--ink-secondary);
+  margin-top: var(--space-1);
+}
+.presentation-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+.presentation-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) 6%;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+.present-card {
+  width: 100%;
+  max-width: 780px;
+  height: min(55dvh, 540px);
+  min-height: 280px;
+  padding: var(--space-6) var(--space-12) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  will-change: transform;
+  animation: arrival 0.26s ease-out;
+}
+.present-card.is-dragging {
+  cursor: grabbing;
+  animation: none !important;
+  box-shadow: var(--shadow-lifted);
+}
+.present-card.is-leaving {
+  animation: none !important;
+}
+.present-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: var(--space-6) 1px var(--space-3);
+  touch-action: pan-y;
+}
+.present-content h2 {
+  font-size: calc(var(--card-font) * 1.55);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.12;
+  margin-bottom: var(--space-6);
+  overflow-wrap: anywhere;
+}
+.present-content p {
+  font-size: var(--card-font);
+  white-space: pre-wrap;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.presentation-bottom {
+  padding: var(--space-2) 4% var(--space-4);
+  max-width: 930px;
+  width: 100%;
+  margin: auto;
+  flex-shrink: 0;
+}
+.present-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+.gesture-tip {
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+}
+.present-counter {
+  font: var(--text-body-lg);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.present-counter > span {
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+  font-weight: 400;
+}
+.thumbs-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--text-body-sm);
+  color: var(--ink-secondary);
+  background: none;
+  padding: var(--space-3) 0;
+}
+.finish-button {
+  font: var(--text-body-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--ink-on-brand);
+  background: var(--ink-primary);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+}
+.presentation .filmstrip {
+  justify-content: safe center;
+  max-height: 112px;
+}
+.presentation .thumb-wrap {
+  width: 108px;
+}
+.keyboard-hint {
+  text-align: center;
+  font: var(--text-caption);
+  color: var(--ink-secondary);
+  margin-top: var(--space-3);
+}
+.keyboard-hint span {
+  padding: 0 var(--space-1);
+}
+.present-text-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  width: min(380px, 90%);
+  background: var(--paper-base);
+  padding: var(--space-4) var(--space-6);
+  position: absolute;
+  right: 5%;
+  top: 79px;
+  z-index: 10;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+}
+.present-text-control .size-control {
+  flex: 1;
+}
+.present-text-control .hint {
+  margin-top: var(--space-2);
+}
+.finish-card {
+  text-align: center;
+  padding: var(--space-8);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: var(--space-6);
+  min-height: 350px;
+  justify-content: center;
+}
+.finish-check {
+  display: grid;
+  place-items: center;
+  background: var(--paper-lemon);
+  color: var(--ink-primary);
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius-full);
+  transform: rotate(-10deg);
+}
+.finish-card h2 {
+  font: var(--text-display-lg);
+  line-height: 1.07;
+  letter-spacing: -1.8px;
+}
+.finish-card > div {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
