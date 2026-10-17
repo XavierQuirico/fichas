@@ -119,6 +119,20 @@ test('a typography chosen right after creating a card is saved and survives a re
   );
 });
 
+test('the check on the chosen typography is drawn inside its button', async ({ app: page }) => {
+  await createDeck(page, 'Marca');
+  const chosen = page.locator('.font-options button[aria-pressed="true"]');
+  await expect(chosen).toHaveCount(1);
+  // The check is an absolutely positioned ::after; without a positioned
+  // button it lands in a corner of the page.
+  await expect(chosen).toHaveCSS('position', 'relative');
+  const check = await chosen.evaluate((el) => {
+    const after = getComputedStyle(el, '::after');
+    return { content: after.content, position: after.position };
+  });
+  expect(check.position).toBe('absolute');
+});
+
 test('a card added with the typography of the current one keeps it', async ({ app: page }) => {
   await createDeck(page, 'Hereda');
   await page.getByRole('button', { name: 'Mono' }).click();
