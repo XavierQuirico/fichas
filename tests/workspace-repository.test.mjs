@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readWorkspace, writeCardFonts } from '../lib/workspace-repository.ts';
+import { readWorkspace, writeCardFonts } from '../lib/server/workspace-repository.ts';
 
 /** A pool whose client logs every statement and can fail on the Nth one. */
 function fakePool({ failOn, code } = {}) {

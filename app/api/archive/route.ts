@@ -1,8 +1,8 @@
-import { authenticatedUserId } from '@/lib/auth';
+import { authenticatedUserId } from '@/lib/server/auth';
 import { database } from '@/db/store';
-import { readArchivedDeckIds, setDeckArchived } from '@/lib/workspace-repository';
-import { isSameOriginMutation } from '@/lib/request-security';
-import { archivePayloadSchema } from '@/lib/workspace-schema';
+import { readArchivedDeckIds, setDeckArchived } from '@/lib/server/workspace-repository';
+import { isSameOriginMutation } from '@/lib/server/request-security';
+import { archivePayloadSchema } from '@/lib/server/workspace-schema';
 import {
   forbidden,
   noStoreHeaders,

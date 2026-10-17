@@ -1,4 +1,4 @@
-import { createRateLimiter } from '@/lib/rate-limit';
+import { createRateLimiter } from '@/lib/server/rate-limit';
 
 // Autosave sends at most one request every ~0.7 s, so 120 per minute leaves room for normal use.
 export const workspaceWriteLimit = createRateLimiter({ limit: 120, windowMs: 60_000 });

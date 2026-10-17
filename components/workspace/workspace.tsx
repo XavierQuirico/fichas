@@ -34,34 +34,12 @@ import { useViewPreferences } from '@/hooks/use-view-preferences';
 import { useWakeLock } from '@/hooks/use-wake-lock';
 import { useWorkspaceSync } from '@/hooks/use-workspace-sync';
 import { writingHints } from '@/lib/card-fonts';
+import { stageBackground } from '@/lib/stage-background';
 import { exampleDeck, newCard, newId, tutorialDeck, type Card, type Deck } from '@/lib/fichas';
 
 const MAX_CARDS_PER_DECK = 200;
 
-const coverColors: Record<string, string> = {
-  lemon: 'var(--cover-lemon)',
-  peach: 'var(--cover-peach)',
-  blue: 'var(--cover-blue)',
-  mint: 'var(--cover-green)',
-  lilac: 'var(--cover-lilac)',
-  white: 'var(--cover-white)',
-};
-
-const stageOverrides: Record<string, string> = {
-  'blue-mist': 'var(--stage-blue-mist)',
-  'lilac-mist': 'var(--stage-lilac-mist)',
-  ink: 'var(--stage-ink)',
-  orange: 'var(--stage-orange)',
-  red: 'var(--stage-red)',
-};
-
-/** Background behind the card: the card's own colour unless a stage colour was picked. */
-function stageBackground(card: Card | undefined): string {
-  const fallback = card?.color ? coverColors[card.color] : 'var(--paper-base)';
-  return stageOverrides[card?.backgroundColor ?? 'default'] ?? fallback;
-}
-
-export default function Home({ accountControl }: { accountControl?: ReactNode }) {
+export function Workspace({ accountControl }: { accountControl?: ReactNode }) {
   const { decks, status, error, current, loaded, save, flush, change, reload } = useWorkspaceSync();
   const { fontMap, fontReady, fontSaving, saveFonts, cardFont } = useCardFonts({
     beforeSave: flush,

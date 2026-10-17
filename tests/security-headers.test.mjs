@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { contentSecurityPolicy, securityHeaders } from '../lib/security-headers.ts';
+import { contentSecurityPolicy, securityHeaders } from '../lib/server/security-headers.ts';
 import { poolSize } from '../db/store.ts';
 
 test('the production policy blocks framing and eval and allows the Clerk hosts', () => {

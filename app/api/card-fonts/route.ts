@@ -1,8 +1,8 @@
-import { authenticatedUserId } from '@/lib/auth';
+import { authenticatedUserId } from '@/lib/server/auth';
 import { database } from '@/db/store';
-import { readCardFonts, writeCardFonts } from '@/lib/workspace-repository';
-import { isSameOriginMutation } from '@/lib/request-security';
-import { fontsPayloadSchema } from '@/lib/workspace-schema';
+import { readCardFonts, writeCardFonts } from '@/lib/server/workspace-repository';
+import { isSameOriginMutation } from '@/lib/server/request-security';
+import { fontsPayloadSchema } from '@/lib/server/workspace-schema';
 import {
   forbidden,
   noStoreHeaders,

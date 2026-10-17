@@ -4,7 +4,7 @@ import {
   workspacePayloadSchema,
   fontsPayloadSchema,
   archivePayloadSchema,
-} from '../lib/workspace-schema.ts';
+} from '../lib/server/workspace-schema.ts';
 
 const card = (overrides = {}) => ({
   id: 'c1',

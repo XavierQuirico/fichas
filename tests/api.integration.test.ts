@@ -8,7 +8,7 @@ import * as archiveRoute from '../app/api/archive/route.ts';
 import * as fontsRoute from '../app/api/card-fonts/route.ts';
 
 // These tests call the real route handlers against a real Postgres. Only the
-// Clerk SDK is replaced (tests/helpers); lib/auth.ts runs as shipped.
+// Clerk SDK is replaced (tests/helpers); lib/server/auth.ts runs as shipped.
 const connected = Boolean(process.env.DATABASE_URL);
 const ORIGIN = 'http://localhost:3000';
 

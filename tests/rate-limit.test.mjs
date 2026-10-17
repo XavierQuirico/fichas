@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createRateLimiter } from '../lib/rate-limit.ts';
+import { createRateLimiter } from '../lib/server/rate-limit.ts';
 
 test('requests over the limit are refused until the window resets', () => {
   let clock = 1_000;

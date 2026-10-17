@@ -1,6 +1,6 @@
 import test, { afterEach } from 'node:test';
 import assert from 'node:assert/strict';
-import { authenticatedUserId, isClerkConfigured } from '../lib/auth.ts';
+import { authenticatedUserId, isClerkConfigured } from '../lib/server/auth.ts';
 
 const keys = ['AUTH_MODE', 'NODE_ENV', 'CLERK_SECRET_KEY', 'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY'];
 const original = Object.fromEntries(keys.map((key) => [key, process.env[key]]));

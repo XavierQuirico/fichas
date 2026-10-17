@@ -9,7 +9,7 @@ import {
   setDeckArchived,
   writeCardFonts,
   writeWorkspace,
-} from '../lib/workspace-repository.ts';
+} from '../lib/server/workspace-repository.ts';
 
 const connectionString = process.env.DATABASE_URL;
 const pool = connectionString ? new Pool({ connectionString, max: 3 }) : undefined;

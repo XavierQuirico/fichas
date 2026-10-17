@@ -14,18 +14,18 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
   ]),
   {
-    files: ['app/workspace-client.tsx', 'hooks/use-long-press-sort.ts'],
+    files: ['components/workspace/workspace.tsx', 'hooks/use-long-press-sort.ts'],
     rules: {
-      // These files contain established interaction effects and pointer refs; keep their behavior unchanged during the auth/data migration.
+      // These two read refs while rendering and set state in effects on purpose (gestures, first load).
       'react-hooks/set-state-in-effect': 'off',
       'react-hooks/preserve-manual-memoization': 'off',
       'react-hooks/refs': 'off',
     },
   },
   {
-    files: ['components/ui/**/*.{ts,tsx}', 'hooks/use-mobile.ts'],
+    files: ['components/ui/**/*.{ts,tsx}'],
     rules: {
-      // Keep vendored UI primitives intact while applying stricter rules to app code.
+      // The shadcn primitives stay as generated; the stricter rules apply to the app's own code.
       '@typescript-eslint/no-unused-vars': 'off',
       'react-hooks/purity': 'off',
       'react-hooks/set-state-in-effect': 'off',

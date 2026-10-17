@@ -6,8 +6,12 @@
 // For local demo mode the owner id is `local-demo-user`.
 import { Pool } from 'pg';
 import { demoDecks } from './demo-data.ts';
-import { workspacePayloadSchema } from '../lib/workspace-schema.ts';
-import { setDeckArchived, writeCardFonts, writeWorkspace } from '../lib/workspace-repository.ts';
+import { workspacePayloadSchema } from '../lib/server/workspace-schema.ts';
+import {
+  setDeckArchived,
+  writeCardFonts,
+  writeWorkspace,
+} from '../lib/server/workspace-repository.ts';
 
 const connectionString = process.env.DATABASE_URL;
 const ownerId = process.env.SEED_OWNER_ID;

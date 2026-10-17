@@ -1,8 +1,8 @@
-import { authenticatedUserId } from '@/lib/auth';
+import { authenticatedUserId } from '@/lib/server/auth';
 import { database } from '@/db/store';
-import { readWorkspace, writeWorkspace } from '@/lib/workspace-repository';
-import { isSameOriginMutation } from '@/lib/request-security';
-import { MAX_WORKSPACE_BYTES, workspacePayloadSchema } from '@/lib/workspace-schema';
+import { readWorkspace, writeWorkspace } from '@/lib/server/workspace-repository';
+import { isSameOriginMutation } from '@/lib/server/request-security';
+import { MAX_WORKSPACE_BYTES, workspacePayloadSchema } from '@/lib/server/workspace-schema';
 import {
   forbidden,
   noStoreHeaders,

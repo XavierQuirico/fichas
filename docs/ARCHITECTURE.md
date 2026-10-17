@@ -30,7 +30,7 @@ The handlers in `app/api/*/route.ts` run these steps in this order. Reads only c
 
 ## Identity and ownership
 
-- Clerk verifies the session on the server (`lib/auth.ts`).
+- Clerk verifies the session on the server (`lib/server/auth.ts`).
 - Every handler takes the owner from that session. It never reads an owner id from the body, the query string or a header.
 - Every query includes the owner, and the foreign keys carry it as well.
 - Demo mode exists for local development only. It signs in a fixed local user and fails closed when `NODE_ENV` is `production`.
@@ -106,12 +106,12 @@ sequenceDiagram
 
 ## Client structure
 
-| Path                       | What it holds                                                          |
-| -------------------------- | ---------------------------------------------------------------------- |
-| `app/workspace-client.tsx` | Wires the hooks and the screens together and owns the deck operations  |
-| `components/workspace/`    | The screens (library, editor, presentation), the dialogs and the parts |
-| `hooks/`                   | Autosave, card fonts, archive, fullscreen, swipe gestures, preferences |
-| `app/styles/`              | The stylesheet, split in source order                                  |
+| Path                                 | What it holds                                                          |
+| ------------------------------------ | ---------------------------------------------------------------------- |
+| `components/workspace/workspace.tsx` | Wires the hooks and the screens together and owns the deck operations  |
+| `components/workspace/`              | The screens (library, editor, presentation), the dialogs and the parts |
+| `hooks/`                             | Autosave, card fonts, archive, fullscreen, swipe gestures, preferences |
+| `app/styles/`                        | The stylesheet, split in source order                                  |
 
 The stylesheet is split without reordering anything. Later rules override earlier ones, so moving rules between files could change the design.
 
@@ -130,4 +130,4 @@ The pool is created lazily from `DATABASE_URL`. `DATABASE_POOL_MAX` sets its siz
 | Components | Vitest and Testing Library    | library, filmstrip, dialogs, editor limits, autosave and fonts      |
 | End to end | Playwright                    | create, edit, autosave, reload, archive, typography, present, swipe |
 
-The Clerk SDK is replaced by a stub in the unit and API tests, and `lib/auth.ts` runs as shipped. The end-to-end tests run against `next dev` in demo mode.
+The Clerk SDK is replaced by a stub in the unit and API tests, and `lib/server/auth.ts` runs as shipped. The end-to-end tests run against `next dev` in demo mode.

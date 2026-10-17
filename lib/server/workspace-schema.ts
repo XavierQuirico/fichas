@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MAX_CARD_BODY_LENGTH, MAX_CARD_TITLE_LENGTH } from './card-limits.ts';
+import { MAX_CARD_BODY_LENGTH, MAX_CARD_TITLE_LENGTH } from '../card-limits.ts';
 
 /**
  * Text that PostgreSQL can store: no NUL character, and no lone surrogate

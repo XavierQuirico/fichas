@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { demoDecks } from '../scripts/demo-data.ts';
-import { workspacePayloadSchema } from '../lib/workspace-schema.ts';
+import { workspacePayloadSchema } from '../lib/server/workspace-schema.ts';
 
 const withoutFonts = (decks) =>
   decks.map(({ id, title, updatedAt, cards }) => ({

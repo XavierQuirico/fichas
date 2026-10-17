@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next';
-import { securityHeaders } from './lib/security-headers';
+import { securityHeaders } from './lib/server/security-headers';
 
 const nextConfig: NextConfig = {
   agentRules: false,
