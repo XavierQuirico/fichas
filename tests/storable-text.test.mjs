@@ -24,7 +24,7 @@ const workspace = (cards, deckOverrides = {}) => ({
 
 test('ordinary text, accents and complete emoji are accepted', () => {
   const ok = workspacePayloadSchema.safeParse(
-    workspace([card({ body: 'Año nuevo 🎉 — “ficha”' })]),
+    workspace([card({ body: 'Año nuevo 🎉 - “ficha”' })]),
   );
   assert.equal(ok.success, true);
 });
