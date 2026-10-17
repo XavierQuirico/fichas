@@ -51,7 +51,7 @@ describe('DemoAccountHint', () => {
 
   it('renders nothing unless both demo variables are set', async () => {
     vi.stubEnv('NEXT_PUBLIC_DEMO_EMAIL', 'demo@example.com');
-    vi.stubEnv('NEXT_PUBLIC_DEMO_PASSWORD', '');
+    vi.stubEnv('NEXT_PUBLIC_DEMO_PASS', '');
     vi.resetModules();
     const DemoAccountHint = await load();
     const { container } = render(<DemoAccountHint />);
@@ -60,7 +60,7 @@ describe('DemoAccountHint', () => {
 
   it('shows the account and copies each value, saying so', async () => {
     vi.stubEnv('NEXT_PUBLIC_DEMO_EMAIL', 'demo@example.com');
-    vi.stubEnv('NEXT_PUBLIC_DEMO_PASSWORD', 'una-contrasena-de-prueba');
+    vi.stubEnv('NEXT_PUBLIC_DEMO_PASS', 'una-contrasena-de-prueba');
     vi.resetModules();
     const DemoAccountHint = await load();
     const user = userEvent.setup();

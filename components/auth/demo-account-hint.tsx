@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-// Set only on the public demo (NEXT_PUBLIC_DEMO_EMAIL and NEXT_PUBLIC_DEMO_PASSWORD).
+// Set only on the public demo (NEXT_PUBLIC_DEMO_EMAIL and NEXT_PUBLIC_DEMO_PASS).
 // Without them nothing is rendered, so a real deployment never shows it.
 const email = process.env.NEXT_PUBLIC_DEMO_EMAIL;
-const password = process.env.NEXT_PUBLIC_DEMO_PASSWORD;
+const password = process.env.NEXT_PUBLIC_DEMO_PASS;
 
 type Field = 'email' | 'password';
 
