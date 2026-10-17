@@ -54,7 +54,7 @@
   }
 }
 
-/* foundation roles; editable type and responsive surface geometry stay intact. */
+/* Base roles; the card text and the responsive geometry are untouched. */
 body {
   font: var(--text-body-md);
 }
@@ -126,8 +126,8 @@ textarea:focus-visible,
   transform: none;
 }
 
-/* noise is painted behind content, never as an overlay over text.
-   Its supplied SVG already contains 9% alpha; do not apply opacity again.
+/* The paper noise is painted behind the content, never over the text.
+   The SVG already has 9% alpha, so do not apply opacity on top.
    Small style previews and thumbnail buttons deliberately keep only ruling. */
 body,
 .app.presenting {

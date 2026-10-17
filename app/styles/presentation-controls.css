@@ -231,7 +231,7 @@
     font: var(--text-caption);
   }
 }
-/* shared alignment and bounded work surfaces. */
+/* Shared alignment and bounded work surfaces. */
 .topbar {
   padding: 0;
   display: block;

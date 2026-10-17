@@ -1,4 +1,4 @@
-/* Fichas — tokens v3 (traducción 1:1 de tokens.json). Nada queda provisional. */
+/* Design tokens: colours, type, spacing, radii, shadows and motion. */
 :root {
   --brand-terracotta: #c1592f;
   --brand-terracotta-hover: #a84a26;
@@ -35,14 +35,14 @@
   --stage-ink: #332a22;
   --stage-orange: #d97b3f;
   --stage-red: #b33d3d;
-  --ficha-white-border: 2px solid var(--ink-secondary); /* hairline obligatorio, min 2px — nunca paper-line */
+  --ficha-white-border: 2px solid var(--ink-secondary); /* white cards need a hairline of at least 2px, never paper-line */
 
-  /* Textura de papel: grano SVG, 9% de opacidad, tile 128px. Fondo general y superficie de fichas; nunca sobre texto ni botones pequeños */
+  /* Paper texture: SVG grain at 9% opacity, 128px tile. Used on the page and on the cards, never over text or small buttons. */
   --paper-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --font-display: 'Fredoka', 'Baloo 2', 'Quicksand', sans-serif;
   --font-body: 'Nunito Sans', system-ui, sans-serif;
-  --font-handwritten: 'Nunito Sans', 'Caveat', 'Kalam', cursive; /* usar itálica 600 */
+  --font-handwritten: 'Nunito Sans', 'Caveat', 'Kalam', cursive; /* use italic 600 */
   --font-mono: 'Space Mono', 'JetBrains Mono', monospace;
 
   --text-display-lg: 600 48px/1.05 var(--font-display);
@@ -86,7 +86,7 @@
   --focus-ring: 2px solid var(--brand-terracotta);
   --focus-offset: 2px;
 
-  /* Movimiento idle de la capa gráfica (acentos decorativos, nunca UI funcional) */
+  /* Idle motion for decorative accents, never for functional UI */
   --idle-float-amplitude: 4px;
   --idle-float-duration: 3800ms;
   --idle-rotate-amplitude: 6deg;
@@ -99,7 +99,7 @@
   }
 }
 
-/* User-approved exception: restore pre-redesign ruling colors exactly. */
+/* Ruling colours per paper, kept from the first version. */
 :root {
   --pattern-line-lemon: #aa8f282b;
   --pattern-line-peach: #b2683f2b;

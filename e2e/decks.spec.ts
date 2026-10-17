@@ -149,6 +149,28 @@ test('a card added with the typography of the current one keeps it', async ({ ap
   await expect(page.getByRole('button', { name: 'Mono' })).toHaveAttribute('aria-pressed', 'true');
 });
 
+test('the top row of a deck cover paints above its stack of cards, so tooltips are not hidden', async ({
+  app: page,
+}) => {
+  await createDeck(page, 'Apilado');
+  await page.getByRole('button', { name: 'Volver a mis exposiciones' }).click();
+  const cover = page.locator('article.deck-item .deck-cover').first();
+  await expect(cover).toBeVisible();
+
+  const { topline, stack, position } = await cover.evaluate((el) => {
+    const z = (node: Element) => Number.parseInt(getComputedStyle(node).zIndex, 10);
+    const topRow = el.querySelector('.deck-cover-topline')!;
+    const layers = [...el.querySelectorAll('.stack, .stack *')].map(z).filter(Number.isFinite);
+    return {
+      topline: z(topRow),
+      stack: Math.max(0, ...layers),
+      position: getComputedStyle(topRow).position,
+    };
+  });
+  expect(position).not.toBe('static');
+  expect(topline).toBeGreaterThan(stack);
+});
+
 test('a duplicated deck is a separate copy', async ({ app: page }) => {
   await createDeck(page, 'Original');
   await page.getByRole('button', { name: 'Volver a mis exposiciones' }).click();

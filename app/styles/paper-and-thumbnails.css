@@ -217,7 +217,7 @@
     margin: 3px 0;
   }
 }
-/* paper styles share a baseline grid with their actual text. */
+/* Ruled and grid papers share a baseline grid with their text. */
 .paper {
   --line-step: calc(var(--card-font, 1.5rem) * 1.55);
 }
@@ -329,7 +329,7 @@
     margin-bottom: var(--space-1);
   }
 }
-/* the same thumbnail actions in editor and presentation. */
+/* The same thumbnail actions in the editor and in the presentation. */
 .thumb-item {
   position: relative;
   flex: 0 0 auto;

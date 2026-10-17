@@ -64,6 +64,10 @@
 .deck-cover-topline .deck-duplicate.icon-button {
   position: absolute;
 }
+/* The top row, and the tooltip of the button in it, must paint above the stack of cards. */
+.deck-cover-topline {
+  z-index: 6;
+}
 .deck-item .deck-duplicate::after {
   top: calc(100% + 7px);
   right: 0;

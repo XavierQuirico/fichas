@@ -30,7 +30,7 @@
   }
 }
 
-/* collection and card counts use distinct symbols. */
+/* Deck and card counts use different symbols. */
 .count {
   position: relative;
   width: 45px;
@@ -66,7 +66,7 @@
   transform: rotate(90deg) scale(0.85);
 }
 
-/* full-surface patterns, synchronized with the body baseline. */
+/* Patterns across the whole card, lined up with the text baseline. */
 @font-face {
   font-family: Kalam;
   src: url('/fonts/Kalam-Regular.ttf') format('truetype');
@@ -187,7 +187,7 @@
   color: var(--ink-secondary);
 }
 
-/* overflow guidance never participates in layout. */
+/* The overflow note never changes the layout. */
 .present-scroll-hint {
   position: absolute;
   bottom: 43px;

@@ -26,8 +26,7 @@
   box-shadow: var(--shadow-lifted);
 }
 
-/* Sticky keeps its light upper edge, and both
-   collection/card quantity badges use the brand orange. */
+/* Sticky keeps its light upper edge, and the deck and card count badges use the brand orange. */
 .editable-card.style-sticky,
 .present-card.style-sticky,
 .stack-front.style-sticky {
@@ -47,7 +46,7 @@
   background: var(--brand-terracotta);
 }
 
-/* Filmstrip previews follow the reference proportions while remaining compact. */
+/* Filmstrip previews stay compact. */
 .thumb-wrap {
   width: 122px;
   padding: var(--space-2);
@@ -64,7 +63,7 @@
   font-size: 8px;
 }
 
-/* exact proportions and physical button feedback. */
+/* Button proportions and a pressed-down feel. */
 .new-exposure-button,
 .present-button {
   font-family: var(--font-body);
@@ -207,7 +206,7 @@
   right: -16px;
 }
 
-/* Filmstrip unificado: misma miniatura en edición y Exponer. */
+/* One thumbnail for both the editor and the presentation. */
 .workspace .filmstrip,
 .presentation .filmstrip {
   display: flex;
@@ -292,7 +291,7 @@
   color: var(--ink-secondary);
 }
 
-/* Button states for Nueva exposición / Exponer. */
+/* Button states for "Nueva exposición" and "Exponer". */
 .new-exposure-button,
 .present-button {
   font-family: 'Nunito Sans', sans-serif;

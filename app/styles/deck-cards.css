@@ -13,7 +13,7 @@
   overflow-y: hidden;
 }
 
-/* restore the original Sticky character and distinguish card texture. */
+/* Sticky cards keep their own character, and textures differ by style. */
 .editable-card,
 .present-card,
 .stack-front {
@@ -38,7 +38,7 @@
   box-shadow: inset 0 10px 0 #ffffff50 !important;
 }
 
-/* component states. */
+/* Component states. */
 .button:not(:disabled):hover,
 .icon-button:not(:disabled):hover {
   box-shadow: var(--shadow-raised);
@@ -194,7 +194,7 @@
   }
 }
 
-/* native fullscreen, preserving the chosen navigation. */
+/* Native fullscreen keeps the chosen navigation. */
 .presentation-header .exit-button {
   background: var(--paper-raised);
   border: 1px solid var(--paper-line);
@@ -214,14 +214,14 @@
   right: 0;
 }
 
-/* the native request is also available on mobile. */
+/* Fullscreen is also available on phones. */
 @media (max-width: 740px) {
   .fullscreen-button {
     display: inline-flex;
   }
 }
 
-/* fixed paper geometry and opaque movable cards. */
+/* Fixed paper geometry, and opaque cards while they are dragged. */
 .stack-front,
 .stack-under {
   height: 100%;

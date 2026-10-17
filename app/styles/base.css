@@ -136,6 +136,11 @@ button:active:not(:disabled) {
   gap: var(--space-6);
   align-items: center;
 }
+.topbar-actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
 .save-status {
   display: flex;
   gap: var(--space-2);

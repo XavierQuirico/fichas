@@ -1,5 +1,5 @@
 /* Dialogs, switches, hover and press feedback, guide and onboarding. */
-/* restrained, consistent feedback across controls. */
+/* Hover and press feedback shared by the controls. */
 .cover-open {
   transition:
     background 0.2s,
@@ -345,7 +345,7 @@
     rotate: -10deg;
   }
 }
-/* presentation controls and real deck previews. */
+/* Presentation controls and the deck previews. */
 .presentation .card-topline {
   justify-content: flex-end;
 }
@@ -387,7 +387,7 @@
     max-width: 46vw;
   }
 }
-/* tutorial and finished example retain distinct roles. */
+/* The guide and the example deck keep different looks. */
 .first-deck {
   grid-column: span 1;
 }
