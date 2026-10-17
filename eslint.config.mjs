@@ -14,6 +14,12 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
   ]),
   {
+    rules: {
+      // Dropping a property with a rest sibling, as in ({ font, ...rest }), is intentional.
+      '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
+    },
+  },
+  {
     files: ['components/workspace/workspace.tsx', 'hooks/use-long-press-sort.ts'],
     rules: {
       // These two read refs while rendering and set state in effects on purpose (gestures, first load).

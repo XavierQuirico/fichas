@@ -25,7 +25,7 @@ const workspace = workspacePayloadSchema.parse({
     id,
     title,
     updatedAt,
-    cards: cards.map(({ font: _font, ...rest }) => rest),
+    cards: cards.map(({ font, ...rest }) => rest),
   })),
 });
 
