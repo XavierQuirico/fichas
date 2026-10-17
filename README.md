@@ -31,10 +31,16 @@ Your decks live in one place. You keep them, archive them or delete them.
 
 These are made-up accounts with sample decks, shared on purpose. The second one is there to check that two accounts never see each other's decks. You can also sign up with your own email. The demo runs on a Clerk development instance, so Clerk shows a "Development mode" label.
 
-|                                                    |                                                                                                                                                                                 |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![Sign in](docs/screenshots/sign-in.png)           | ![The editor](docs/screenshots/editor.png)                                                                                                                                      |
-| ![Presenting a card](docs/screenshots/present.png) | <img src="docs/screenshots/mobile-library.png" width="220" alt="The library on a phone"> <img src="docs/screenshots/mobile-editor.png" width="220" alt="The editor on a phone"> |
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/screenshots/sign-in.png" alt="The sign-in screen"><br><sub>Sign in</sub></td>
+    <td width="50%" align="center"><img src="docs/screenshots/editor.png" alt="The editor"><br><sub>The editor</sub></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><img src="docs/screenshots/present.png" alt="Presenting a card"><br><sub>Presenting: swipe, or use the keyboard</sub></td>
+    <td width="50%" align="center"><img src="docs/screenshots/phones.png" alt="The library and the editor on a phone"><br><sub>On a phone</sub></td>
+  </tr>
+</table>
 
 ## What it does
 
