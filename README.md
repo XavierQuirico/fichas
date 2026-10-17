@@ -144,7 +144,7 @@ What I measured on the last run:
 | Components (Vitest) | 35    | top bar, sign-in frame, library, filmstrip, dialogs, editor limits, autosave      |
 | End to end          | 19    | create, edit, autosave, reload, archive, typography, present, swipe, phone layout |
 
-Coverage is 96.7% of lines (90.9% of branches) for `lib/`, `app/api/` and `db/`. For `components/` and `hooks/` the component tests alone cover less (about 40% of lines); the rest of the interface is exercised by the end-to-end tests, which I do not instrument.
+Coverage is 96.7% of lines (90.9% of branches) for `lib/`, `app/api/` and `db/`. For `components/workspace/` and `hooks/` the component tests alone reach 24.7% of lines. The large `workspace.tsx`, which wires everything together, is only exercised by the end-to-end tests, and I do not measure those.
 
 CI runs formatting, lint, typecheck, `pnpm audit --prod` (no known vulnerabilities), both coverage runs, the build and the end-to-end tests, with a Postgres service container.
 
