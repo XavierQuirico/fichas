@@ -1,10 +1,24 @@
 import { z } from 'zod';
 import { MAX_CARD_BODY_LENGTH, MAX_CARD_TITLE_LENGTH } from './card-limits.ts';
 
+/**
+ * Text that PostgreSQL can store: no NUL character, and no lone surrogate
+ * (cutting an emoji in half at a length limit leaves one). Either makes the
+ * jsonb input fail, which would turn every later save into a 503.
+ */
+export const isStorableText = (value: string) => !value.includes('\u0000') && value.isWellFormed();
+
+const text = (max: number, min = 0) =>
+  z
+    .string()
+    .min(min)
+    .max(max)
+    .refine(isStorableText, { message: 'Contains characters that cannot be stored' });
+
 export const cardSchema = z.object({
-  id: z.string().min(1).max(100),
-  title: z.string().max(MAX_CARD_TITLE_LENGTH),
-  body: z.string().max(MAX_CARD_BODY_LENGTH),
+  id: text(100, 1),
+  title: text(MAX_CARD_TITLE_LENGTH),
+  body: text(MAX_CARD_BODY_LENGTH),
   color: z.enum(['lemon', 'peach', 'blue', 'mint', 'lilac', 'white']),
   style: z.enum(['sticky', 'lined', 'clean', 'grid']),
   size: z.number().int().min(18).max(42),
@@ -14,8 +28,8 @@ export const cardSchema = z.object({
 });
 
 export const deckSchema = z.object({
-  id: z.string().min(1).max(100),
-  title: z.string().min(1).max(160),
+  id: text(100, 1),
+  title: text(160, 1),
   cards: z
     .array(cardSchema)
     .max(200)
@@ -37,13 +51,13 @@ export const workspacePayloadSchema = z
   });
 
 export const archivePayloadSchema = z.object({
-  id: z.string().min(1).max(100),
+  id: text(100, 1),
   archived: z.boolean(),
 });
 
 export const fontsPayloadSchema = z.object({
   ids: z
-    .array(z.string().min(1).max(100))
+    .array(text(100, 1))
     .min(1)
     .max(200)
     .refine((ids) => new Set(ids).size === ids.length),

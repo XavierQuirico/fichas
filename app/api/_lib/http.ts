@@ -32,16 +32,43 @@ export function payloadTooLarge() {
   );
 }
 
+/**
+ * Reads the body as JSON without ever holding more than `maxBytes` of it.
+ * Returns null when the body is too big, undefined when it is not valid JSON.
+ * The stream is read in chunks, so the cap holds even with no Content-Length
+ * header (chunked uploads).
+ */
 export async function readJsonWithinLimit(
   request: Request,
   maxBytes: number,
 ): Promise<unknown | null> {
   const contentLength = Number(request.headers.get('content-length'));
   if (Number.isFinite(contentLength) && contentLength > maxBytes) return null;
-  const raw = await request.text();
-  if (new TextEncoder().encode(raw).byteLength > maxBytes) return null;
+
+  const chunks: Uint8Array[] = [];
+  let received = 0;
+  const reader = request.body?.getReader();
+  if (reader) {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      received += value.byteLength;
+      if (received > maxBytes) {
+        await reader.cancel().catch(() => undefined);
+        return null;
+      }
+      chunks.push(value);
+    }
+  }
+
+  const bytes = new Uint8Array(received);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
   try {
-    return JSON.parse(raw) as unknown;
+    return JSON.parse(new TextDecoder().decode(bytes)) as unknown;
   } catch {
     return undefined;
   }

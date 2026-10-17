@@ -130,11 +130,37 @@ test('invalid collections are refused with 400', opts, async () => {
     { revision: 0, decks: [deck([card({ color: 'pink' })])] },
     { revision: 0, decks: [deck([tooLong])] },
     { revision: 0, decks: [deck([card({ id: 'dup' }), card({ id: 'dup' })])] },
+    // Text PostgreSQL cannot store: refused as 400, never a 503 on every later save.
+    { revision: 0, decks: [deck([card({ body: 'a\u0000b' })])] },
+    { revision: 0, decks: [deck([card({ body: `cut ${'🎉'.slice(0, 1)}` })])] },
   ];
   for (const body of bodies) {
     const response = await workspaceRoute.PUT(request('/api/workspace', { method: 'PUT', body }));
     assert.equal(response.status, 400, JSON.stringify(body).slice(0, 80));
   }
+});
+
+test('a chunked upload with no Content-Length is cut off at the cap with 413', opts, async () => {
+  signIn();
+  const chunk = new TextEncoder().encode('x'.repeat(64 * 1024));
+  let sent = 0;
+  const body = new ReadableStream({
+    pull(controller) {
+      // Far more than the 4 MiB cap; the handler has to stop reading by itself.
+      if (sent++ >= 200) return controller.close();
+      controller.enqueue(chunk);
+    },
+  });
+  const response = await workspaceRoute.PUT(
+    new Request(`${ORIGIN}/api/workspace`, {
+      method: 'PUT',
+      headers: { origin: ORIGIN, 'content-type': 'application/json' },
+      body,
+      duplex: 'half',
+    } as RequestInit),
+  );
+  assert.equal(response.status, 413);
+  assert.ok(sent < 100, `the handler read ${sent} chunks`);
 });
 
 test('a card body of exactly 20000 characters is accepted', opts, async () => {

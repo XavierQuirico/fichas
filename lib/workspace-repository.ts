@@ -17,6 +17,8 @@ type CardRow = {
   position: number;
 };
 
+const FOREIGN_KEY_VIOLATION = '23503';
+
 export async function readWorkspace(pool: Pool, ownerId: string) {
   const client = await pool.connect();
   try {
@@ -59,6 +61,10 @@ export async function readWorkspace(pool: Pool, ownerId: string) {
       })),
       revision: state.rows[0]?.revision ?? 0,
     };
+  } catch (error) {
+    // Never hand a connection back to the pool inside an aborted transaction.
+    await client.query('ROLLBACK').catch(() => undefined);
+    throw error;
   } finally {
     client.release();
   }
@@ -205,6 +211,8 @@ export async function writeCardFonts(
     return true;
   } catch (error) {
     await client.query('ROLLBACK').catch(() => undefined);
+    // A card deleted by a concurrent save between the join and the insert.
+    if ((error as { code?: string }).code === FOREIGN_KEY_VIOLATION) return false;
     throw error;
   } finally {
     client.release();
