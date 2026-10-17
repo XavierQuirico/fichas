@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: fichas
+          POSTGRES_USER: fichas
+          POSTGRES_PASSWORD: fichas-ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U fichas -d fichas"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://fichas:fichas-ci@localhost:5432/fichas
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Audit production dependencies
+        run: pnpm audit --prod
+      - name: Check formatting
+        run: pnpm format:check
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - name: Apply migrations
+        run: pnpm db:migrate
+      - name: Unit and API tests with coverage
+        run: pnpm coverage:server
+      - name: Component tests with coverage
+        run: pnpm coverage:components
+      - run: pnpm build
+      - name: Install the browser
+        run: pnpm exec playwright install --with-deps chromium
+      - name: End-to-end tests
+        run: pnpm e2e
+      - name: Keep the Playwright report when a test fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+          retention-days: 7
