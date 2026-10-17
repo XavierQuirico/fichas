@@ -1,0 +1,17 @@
+# Explicitly allow only native installers needed by the database/auth toolchain.
+packages:
+  - .
+allowBuilds:
+  '@clerk/shared@3.48.0': true
+  'esbuild@0.18.20': true
+  'esbuild@0.25.12': true
+  'esbuild@0.28.0': true
+  'unrs-resolver@1.11.1': true
+# Transitive packages with published advisories; pinned to the patched range.
+overrides:
+  browserslist: '>=4.28.7'
+  source-map-js: '>=1.2.2'
+  sharp: '>=0.35.5'
+  baseline-browser-mapping: '>=2.11.0'
+  fast-uri: '>=3.1.8'
+  '@babel/core': '>=7.29.6'

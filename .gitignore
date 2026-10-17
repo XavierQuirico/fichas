@@ -1,0 +1,27 @@
+# dependencies
+/node_modules
+
+# build output
+/.next/
+/out/
+/dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# tests
+/coverage
+/playwright-report
+/test-results
+
+# environment files
+.env*
+!.env.example
+
+# deploy tooling
+.vercel
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.pnpm-debug.log*

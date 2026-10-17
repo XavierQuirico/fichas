@@ -1,0 +1,15 @@
+Copyright (c) 2026 Xavier Quirico. All rights reserved.
+
+The source code, the Fichas name, the logo and the visual design in this
+repository are published so that you can read them. No licence to copy,
+modify, distribute or use them for any other purpose is granted, except
+where the law gives you that right regardless.
+
+Third-party material keeps its own licence:
+
+- The fonts in public/fonts are used under the SIL Open Font License 1.1.
+  Each family ships with its licence text next to the font files.
+- vendor/shadcn-tailwind-4.13.0.css is used under the licence in
+  vendor/shadcn-tailwind-4.13.0.LICENSE.md.
+- The components in components/ui come from shadcn/ui (MIT).
+- npm dependencies are covered by their own licences.
