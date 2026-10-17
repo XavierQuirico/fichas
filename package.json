@@ -21,6 +21,7 @@
     "e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:seed": "node --experimental-strip-types scripts/seed-demo.ts",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down"
   },
