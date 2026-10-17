@@ -14,11 +14,11 @@ const paperLine = '#dedac4';
 export const clerkAppearance: Appearance = {
   variables: {
     colorPrimary: terracotta,
-    colorText: ink,
-    colorTextSecondary: inkSecondary,
+    colorForeground: ink,
+    colorMutedForeground: inkSecondary,
     colorBackground: '#ffffff',
-    colorInputBackground: '#fffdf7',
-    colorInputText: ink,
+    colorInput: '#fffdf7',
+    colorInputForeground: ink,
     colorDanger: '#b33d3d',
     colorSuccess: '#4e8a57',
     borderRadius: '12px',
