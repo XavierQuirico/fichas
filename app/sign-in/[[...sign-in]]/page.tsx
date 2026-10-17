@@ -1,7 +1,8 @@
 import { SignIn } from '@clerk/nextjs';
 import Link from 'next/link';
-import { isClerkConfigured } from '@/lib/auth';
-import { BrandLogo } from '@/components/brand-logo';
+import { isClerkConfigured } from '@/lib/server/auth';
+import { AuthShell } from '@/components/auth/auth-shell';
+import { DemoAccountHint } from '@/components/auth/demo-account-hint';
 
 export default function SignInPage() {
   if (!isClerkConfigured())
@@ -15,17 +16,8 @@ export default function SignInPage() {
       </main>
     );
   return (
-    <main className="auth-screen">
-      <section className="auth-brand">
-        <Link className="brand" href="/">
-          <span className="brand-icon">
-            <BrandLogo size={32} />
-          </span>
-          fichas<span className="brand-dot">.</span>
-        </Link>
-        <p>Una ficha por idea. Todo a tu ritmo.</p>
-      </section>
+    <AuthShell mode="sign-in" aside={<DemoAccountHint />}>
       <SignIn routing="path" path="/sign-in" signUpUrl="/sign-up" />
-    </main>
+    </AuthShell>
   );
 }

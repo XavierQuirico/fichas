@@ -1,21 +1,11 @@
-/* Sign-in and sign-up screens. */
-.auth-screen,
+/* Sign-in and sign-up screens, and the "set up your environment" notice. */
 .auth-setup-screen {
   min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px;
   padding: 32px 20px;
   background: var(--paper-base);
-}
-.auth-brand {
-  width: min(360px, 100%);
-}
-.auth-brand > p {
-  margin: 14px 0 0;
-  color: var(--ink-secondary);
-  font: var(--text-body-lg);
 }
 .auth-setup-card {
   width: min(440px, 100%);
@@ -38,15 +28,271 @@
   color: var(--brand-terracotta);
   font-weight: 700;
 }
-@media (max-width: 760px) {
-  .auth-screen {
-    flex-direction: column;
-    gap: 24px;
+
+/* Two columns: what Fichas is on the left, the form on the right. */
+.auth-screen {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  background: var(--paper-base);
+}
+.auth-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-4);
+  /* Centre a 480px block in the column instead of hugging the left edge. */
+  padding: var(--space-12) var(--space-8) var(--space-12)
+    max(var(--space-8), calc((100% - 480px) / 2));
+}
+.auth-stage h1 {
+  margin: var(--space-6) 0 0;
+  max-width: 16ch;
+  color: var(--ink-primary);
+  font: var(--text-display-lg);
+  text-wrap: balance;
+}
+.auth-lead {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--ink-secondary);
+  font: var(--text-body-lg);
+}
+.auth-benefits {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+  color: var(--ink-primary);
+  font: var(--text-body-md);
+}
+.auth-benefits li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.auth-benefits li::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand-terracotta);
+}
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-6);
+  background: var(--paper-raised);
+  border-left: 1px solid var(--paper-line);
+}
+.auth-privacy {
+  margin: 0;
+  max-width: 360px;
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+  text-align: center;
+}
+
+/* The account for people who only want to look around (public demo only). */
+.auth-demo {
+  width: min(100%, 400px);
+  padding: var(--space-4);
+  border: 1px dashed var(--ink-secondary);
+  border-radius: var(--radius-md);
+  background: var(--paper-white);
+  color: var(--ink-primary);
+}
+.auth-demo p {
+  margin: 0;
+}
+.auth-demo-title {
+  font: var(--text-display-sm);
+  font-size: 18px;
+}
+.auth-demo-text {
+  margin-top: var(--space-1) !important;
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+}
+.auth-demo dl {
+  margin: var(--space-3) 0 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.auth-demo dl > div {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-2);
+  font: var(--text-body-sm);
+}
+.auth-demo dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.auth-demo code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font: var(--text-body-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.auth-demo button {
+  flex: none;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-full);
+  background: var(--paper-base);
+  color: var(--brand-terracotta);
+  font: var(--text-body-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--dur-hover) var(--ease-move),
+    transform var(--dur-press) var(--ease-move);
+}
+.auth-demo button:hover {
+  background: var(--brand-terracotta-tint);
+}
+.auth-demo button:active {
+  transform: scale(0.96);
+}
+.auth-demo button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* Three cards that take turns leaving to the left. One cycle is nine seconds,
+   split in three slots: front, middle, back. */
+.auth-preview {
+  position: relative;
+  width: min(420px, 100%);
+  height: 280px;
+  margin: var(--space-4) 0 var(--space-2);
+  --slot-front: translate(0, 0) rotate(-2deg) scale(1);
+  --slot-middle: translate(16px, -14px) rotate(3deg) scale(0.96);
+  --slot-back: translate(30px, -26px) rotate(7deg) scale(0.92);
+}
+.auth-card {
+  position: absolute;
+  inset: 30px 36px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-1);
+  padding: var(--space-6);
+  border-radius: 3px 3px 22px 3px;
+  box-shadow: 0 18px 22px -14px rgba(67, 73, 56, 0.45);
+  color: var(--ink-primary);
+  animation: auth-cycle 9s cubic-bezier(0.22, 0.8, 0.25, 1) infinite;
+}
+.auth-card strong {
+  font: var(--text-display-sm);
+  font-size: 26px;
+}
+.auth-card span {
+  color: var(--ink-secondary);
+  font: var(--text-body-sm);
+}
+.auth-card-lemon {
+  background: var(--paper-lemon);
+}
+.auth-card-blue {
+  background: var(--paper-blue);
+  animation-delay: -6s;
+}
+.auth-card-mint {
+  background: var(--paper-green);
+  animation-delay: -3s;
+}
+@keyframes auth-cycle {
+  0%,
+  28% {
+    transform: var(--slot-front);
+    z-index: 3;
+    opacity: 1;
   }
-  .auth-brand {
-    width: min(440px, 100%);
+  34% {
+    transform: translate(-150%, 8px) rotate(-16deg);
+    z-index: 3;
+    opacity: 0;
+  }
+  35% {
+    transform: var(--slot-back);
+    z-index: 1;
+    opacity: 0;
+  }
+  38%,
+  62% {
+    transform: var(--slot-back);
+    z-index: 1;
+    opacity: 1;
+  }
+  68%,
+  95% {
+    transform: var(--slot-middle);
+    z-index: 2;
+    opacity: 1;
+  }
+  100% {
+    transform: var(--slot-front);
+    z-index: 3;
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-card {
+    animation: none;
+  }
+  .auth-card-lemon {
+    transform: var(--slot-front);
+    z-index: 3;
+  }
+  .auth-card-blue {
+    transform: var(--slot-middle);
+    z-index: 2;
+  }
+  .auth-card-mint {
+    transform: var(--slot-back);
+    z-index: 1;
+  }
+}
+
+/* Narrow screens: the form comes first and the picture goes away. */
+@media (max-width: 900px) {
+  .auth-screen {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .auth-stage {
+    padding: var(--space-8) var(--space-6) var(--space-4) var(--space-6);
+    gap: var(--space-3);
+  }
+  .auth-stage h1 {
+    margin-top: var(--space-3);
+    max-width: none;
+    font: var(--text-display-md);
+  }
+  .auth-preview,
+  .auth-benefits {
+    display: none;
+  }
+  .auth-panel {
+    justify-content: flex-start;
+    padding: var(--space-6) var(--space-4) var(--space-12);
+    border-left: 0;
+    border-top: 1px solid var(--paper-line);
   }
   .auth-setup-card {
-    padding: 24px;
+    padding: var(--space-6);
   }
 }
