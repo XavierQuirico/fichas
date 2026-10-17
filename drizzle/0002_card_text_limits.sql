@@ -1,0 +1,2 @@
+ALTER TABLE "cards" ADD CONSTRAINT "cards_title_length_check" CHECK (char_length("cards"."title") <= 300);--> statement-breakpoint
+ALTER TABLE "cards" ADD CONSTRAINT "cards_body_length_check" CHECK (char_length("cards"."body") <= 20000);

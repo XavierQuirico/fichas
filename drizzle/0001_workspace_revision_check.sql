@@ -1,0 +1,1 @@
+ALTER TABLE "workspaces" ADD CONSTRAINT "workspaces_revision_check" CHECK ("workspaces"."revision" >= 0);
