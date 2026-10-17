@@ -99,8 +99,9 @@ sequenceDiagram
 ```
 
 - Each save sends the **whole** collection. It is simple and the collection is small, but it is not a diff.
-- Edits made while a save is running are not lost: `generation` keeps counting, and the status goes back to "pending" and saves again.
-- `flush()` saves right now. Card fonts call it first, because the server only stores a font for a card it already has.
+- Edits made while a save is running are not lost: `generation` keeps counting, and when the save ends the hook schedules another one.
+- `flush()` saves right now and says whether everything reached the server. Card fonts call it first and are not sent if it says no, because the server only stores a font for a card it already has.
+- After a reload from the server, nothing counts as unsaved, so the browser stops asking before the tab closes.
 - Reads use a `REPEATABLE READ` transaction so the revision and the content come from the same snapshot.
 
 ## Client structure

@@ -43,7 +43,9 @@ Reads only run steps 1 and 6. Every response sends `Cache-Control: no-store`.
 | `PUT /api/archive`    | 8 KiB    | 30 per minute          |
 | `PUT /api/card-fonts` | 32 KiB   | 30 per minute          |
 
-Inside the collection: at most 200 decks, 200 cards per deck, a deck title of 1 to 160 characters, a card title of up to 300 and a card body of up to 20,000.
+Inside the collection: at most 200 decks, 200 cards per deck, a deck title of 1 to 160 characters, a card title of up to 300 and a card body of up to 20,000. Text cannot contain a NUL character or a lone surrogate (an emoji cut in half): PostgreSQL would reject it and every later save would fail, so it is a `400` instead.
+
+The body cap is enforced while the body is read, in chunks, so it also holds for uploads that arrive without a `Content-Length` header.
 
 ## Saving the collection
 

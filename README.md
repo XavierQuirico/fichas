@@ -82,14 +82,14 @@ What I measured on the last run:
 
 | Layer               | Tests | What it covers                                                                    |
 | ------------------- | ----- | --------------------------------------------------------------------------------- |
-| Unit (`node:test`)  | 25    | schemas, origin check, rate limiter, headers, gestures, auth, seed data           |
-| API (real Postgres) | 17    | 401, 403, 400, 404, 409, 413 and 429 on the three routes, and account isolation   |
-| Components (Vitest) | 23    | library, filmstrip, dialogs, editor limits, autosave and font hooks               |
+| Unit (`node:test`)  | 39    | schemas, origin check, rate limiter, headers, gestures, auth, seed data           |
+| API (real Postgres) | 18    | 401, 403, 400, 404, 409, 413 and 429 on the three routes, and account isolation   |
+| Components (Vitest) | 26    | library, filmstrip, dialogs, editor limits, autosave and font hooks               |
 | End to end          | 18    | create, edit, autosave, reload, archive, typography, present, swipe, phone layout |
 
-Coverage is 96.2% of lines (89.9% of branches) for `lib/`, `app/api/` and `db/`. For `components/workspace/` and `hooks/` the component tests alone reach 36.3% of lines; the rest of the interface is exercised by the end-to-end tests, which I do not instrument.
+Coverage is 96.7% of lines (90.9% of branches) for `lib/`, `app/api/` and `db/`. For `components/workspace/` and `hooks/` the component tests alone reach 38.2% of lines; the rest of the interface is exercised by the end-to-end tests, which I do not instrument.
 
-CI runs formatting, lint, typecheck, `pnpm audit --prod` (no known vulnerabilities), both coverage runs, the build and the end-to-end tests, with a Postgres service container. The tests found two real bugs that are fixed here: saving the collection failed against a real database (the deck timestamp key did not match the SQL), and choosing a typography right after creating a card failed because the card was not saved yet.
+CI runs formatting, lint, typecheck, `pnpm audit --prod` (no known vulnerabilities), both coverage runs, the build and the end-to-end tests, with a Postgres service container. Testing and a review turned up real bugs that are fixed here: saving the collection failed against a real database (the deck timestamp key did not match the SQL); choosing a typography right after creating a card failed because the card was not saved yet; edits typed during a slow save stayed "pending" and were never sent; a card with a NUL character or half an emoji made every later save fail; a failed read could return a broken connection to the pool; and the request size cap did not hold for chunked uploads.
 
 ## What's not done
 
